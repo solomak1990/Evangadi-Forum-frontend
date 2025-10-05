@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useContext, useEffect, useState, createContext } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { UserContext } from "./component/Dataprovide/DataProvider";
+import Home from "./pages/Home/Home";
+import Login from "./pages/login/login";
+import axios from "./axiosConfig";
+import Question from "./pages/Question/Question";
+import Register from "./pages/Register/Register";
+import Answer from "./pages/Answer/Answer";
+import axiosBase from "./axiosConfig";
+import Profile from "./component/Header/Profile";
+import NotFound from "./pages/login/Notfound";
+
+export const AppState = createContext();
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userData, setUserData] = useContext(UserContext);
+  let token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const [user, setUser] = useState();
 
+  const checkUser2 = async () => {
+    try {
+      const { data } = await axios.get("/users/check", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      // setUserData({ data });
+      setUserData({ data });
+      // console.log(data);
+    } catch (error) {
+      // console.log(error);
+      navigate("/login");
+    }
+  };
+
+  // console.log(userData.user.display_name.length ,"kkkk")
+  useEffect(() => {
+    checkUser2();
+  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppState.Provider value={{ user, setUser }}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/question" element={<Question />} />
+        <Route path="/question/:id" element={<Answer />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AppState.Provider>
+  );
 }
 
-export default App
+export default App;
