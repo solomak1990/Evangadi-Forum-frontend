@@ -1,0 +1,54 @@
+
+
+/* Container for the entire question list */
+.questionListContainer {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page title */
+.questionListContainer h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Individual question card */
+.questionCard {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.questionCard:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Question title link */
+.questionCard h3 a {
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.questionCard h3 a:hover {
+  text-decoration: underline;
+}
+
+/* Description preview */
+.questionCard p {
+  color: #555;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+ /* (posted by, date) */
+.questionCard p strong {
+  color: #333;
+}

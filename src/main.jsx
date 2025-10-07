@@ -25,8 +25,8 @@ const rootElement = document.getElementById("root");
 
 createRoot(rootElement).render(
   <React.StrictMode>
-    <UserProvider value={initialUserData}>
-      <App />
-    </UserProvider>
+     <UserProvider value={initialUserData}> 
+       <App />
+     </UserProvider> 
   </React.StrictMode>
 );
