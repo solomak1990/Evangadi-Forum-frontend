@@ -1,36 +1,57 @@
+import React, { useContext, useEffect, useState, createContext } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { UserContext } from "./component/Dataprovide/DataProvider";
+import Home from "./pages/Home/Home";
+import Login from "./pages/login/login";
+import axios from "./axiosConfig";
+import Question from "./pages/Question/Question";
+import Register from "./pages/Register/Register";
+import Answer from "./pages/Answer/Answer";
+import axiosBase from "./axiosConfig";
+import Profile from "./component/Header/Profile";
+import NotFound from "./pages/login/Notfound";
 
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import QuestionList from "./components/QuestionList"; // adjust path as needed
+export const AppState = createContext();
 
-// const App = () => {
-//   const token = "your-auth-token"; // Replace with actual token logic
+function App() {
+  const [userData, setUserData] = useContext(UserContext);
+  let token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const [user, setUser] = useState();
 
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/questions" element={<QuestionList token={token} />} />
-//         {/* Other routes */}
-//       </Routes>
-//     </Router>
-//   );
-// };
+  const checkUser2 = async () => {
+    try {
+      const { data } = await axios.get("/users/check", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      // setUserData({ data });
+      setUserData({ data });
+      // console.log(data);
+    } catch (error) {
+      // console.log(error);
+      navigate("/login");
+    }
+  };
 
-// export default App;
-import React from 'react'
-import QuestionList from './Pages/Questionlist/QuestionList'
-
-const App = () => {
+  // console.log(userData.user.display_name.length ,"kkkk")
+  useEffect(() => {
+    checkUser2();
+  }, []);
   return (
-
-
-
-    <div>
-
-
-      <QuestionList/>
-    </div>
-  )
+    <AppState.Provider value={{ user, setUser }}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/question" element={<Question />} />
+        <Route path="/question/:id" element={<Answer />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AppState.Provider>
+  );
 }
 
-export default App
+export default App;

@@ -1,20 +1,9 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import App from "./App.jsx";
-// import { BrowserRouter } from "react-router-dom";
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <App />
-//     </BrowserRouter>
-//   </React.StrictMode>
-// );
-
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { UserProvider } from "./component/Dataprovide/DataProvider.jsx";
+import "bootstrap/dist/css/bootstrap.css";
+import { BrowserRouter } from "react-router-dom";
 
 const authToken = localStorage.getItem("authtoken");
 const initialUserData = authToken
@@ -25,8 +14,10 @@ const rootElement = document.getElementById("root");
 
 createRoot(rootElement).render(
   <React.StrictMode>
-     <UserProvider value={initialUserData}> 
-       <App />
-     </UserProvider> 
+    <UserProvider value={initialUserData}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>
 );
