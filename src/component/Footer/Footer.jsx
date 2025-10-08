@@ -1,13 +1,16 @@
 import styles from "./Footer.module.css";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import logo from "../../assets/evangadi-logo.jpg";
+
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.logoSection}>
-        <img src={logo} alt="Evangadi Logo" className={styles.logoImg} />
-        
+        <img
+          src="https://evanforum.com/assets/logo-D98Zk6nH.png"
+          alt="Evangadi Logo"
+          className={styles.logoImg}
+        />
 
         <div className={styles.socials}>
           <a
