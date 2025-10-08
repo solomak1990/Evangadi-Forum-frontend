@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../../axiosConfig";
-import RingLoader from "./RingLoader/RingLoader";
+import Loader from "../Loader/Loader";
 import Layout from "./Layout/Layout";
-import classes from "./";
+import classes from "./questionlist.module.css";
 
 const SingleQuestion = ({ token }) => {
   const { id } = useParams();
@@ -15,9 +15,10 @@ const SingleQuestion = ({ token }) => {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const res = await axios.get(`/api/question/${question_id}`);
-        if (res.data.question) {
-          setQuestion(res.data.question);
+        const res = await axios.get(`/api/question/${id}`); // <-- fixed variable
+        if (res.data) {
+          // <-- match backend response
+          setQuestion(res.data);
         } else {
           setError("We cannot find the Question");
         }
@@ -41,14 +42,12 @@ const SingleQuestion = ({ token }) => {
     }
 
     try {
-      
       const res = await axios.post(
         `/api/answer`,
         { question_id: id, answer: newAnswer },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      
       const updatedAnswers = question.answers
         ? question.answers.concat(res.data.answer)
         : [res.data.answer];
@@ -62,7 +61,7 @@ const SingleQuestion = ({ token }) => {
     }
   };
 
-  if (loading) return <RingLoader />;
+  if (loading) return <Loader />;
   if (error) return <p className={classes.error}>{error}</p>;
 
   return (
@@ -70,9 +69,9 @@ const SingleQuestion = ({ token }) => {
       <div className={classes.singleQuestionContainer}>
         <div className={classes.questionCard}>
           <h2 className={classes.questionTitle}>{question.title}</h2>
-          <p className={classes.questionDescription}>{question.content}</p>
+          <p className={classes.questionDescription}>{question.description}</p>
           <p>
-            <strong>Posted by:</strong> User {question.question_id}
+            <strong>Posted by:</strong> {question.username}
           </p>
         </div>
 
