@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "../../axiosConfig";
 import RingLoader from "./RingLoader/RingLoader";
 import Layout from "./Layout/Layout";
-import classes from "./SingleQuestion.module.css";
+import classes from "./";
 
 const SingleQuestion = ({ token }) => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const SingleQuestion = ({ token }) => {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const res = await axios.get(`/api/question/${id}`);
+        const res = await axios.get(`/api/question/${question_id}`);
         if (res.data.question) {
           setQuestion(res.data.question);
         } else {
@@ -44,7 +44,7 @@ const SingleQuestion = ({ token }) => {
       
       const res = await axios.post(
         `/api/answer`,
-        { questionid: id, answer: newAnswer },
+        { question_id: id, answer: newAnswer },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -72,7 +72,7 @@ const SingleQuestion = ({ token }) => {
           <h2 className={classes.questionTitle}>{question.title}</h2>
           <p className={classes.questionDescription}>{question.content}</p>
           <p>
-            <strong>Posted by:</strong> User {question.id}
+            <strong>Posted by:</strong> User {question.question_id}
           </p>
         </div>
 
