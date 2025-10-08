@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { UserContext } from "../../component/Dataprovide/DataProvider";
+import { UserContext } from "../../component/Dataprovider/DataProvider.jsx";
 import axios from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
