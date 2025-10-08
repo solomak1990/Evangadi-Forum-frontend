@@ -50,41 +50,41 @@ function Register() {
     <section>
       <form onSubmit={handleSubmit}>
         <div>
-          <span>Username :---</span>
-          <input ref={userNameDom} type="text" placeholder="username" />
+          <span>User Nname :---</span>
+          <input ref={userNameDom} type="text" placeholder="User Name" />
         </div>
         <br />
         <div>
-          <span>First name :---</span>
+          <span>First Name :---</span>
           <input
             ref={firstnameDom}
             type="text"
-            placeholder="first name"
+            placeholder="First Name"
             required
           />
         </div>
         <br />
         <div>
-          <span>last name :--- </span>
+          <span>Last Name :--- </span>
           <input
             ref={lastnameDom}
             type="text"
-            placeholder="last name"
+            placeholder="Last Name"
             required
           />
         </div>
         <br />
         <div>
-          <span>email :---</span>
-          <input ref={emailDom} type="email" placeholder="email" required />
+          <span>Email :---</span>
+          <input ref={emailDom} type="email" placeholder="Email" required />
         </div>
         <br />
         <div>
-          <span>password :--- </span>
+          <span>Password :--- </span>
           <input
             ref={passwordDom}
             type="password"
-            placeholder="password"
+            placeholder="Password"
             required
           />
         </div>
