@@ -1,7 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import { UserProvider } from "./component/Dataprovide/DataProvider.jsx";
+<<<<<<< HEAD
+import { UserProvider } from "./component/Dataprovider/DataProvirer.jsx";
+=======
+// import { UserProvider } from "./component/Dataprovide/DataProvider.jsx";
+>>>>>>> aff395b356e05c5dfccd60ef8bfdc5be0a735ac5
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,10 +18,10 @@ const rootElement = document.getElementById("root");
 
 createRoot(rootElement).render(
   <React.StrictMode>
-    <UserProvider value={initialUserData}>
+    {/* <UserProvider value={initialUserData}> */}
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </UserProvider>
+    {/* </UserProvider> */}
   </React.StrictMode>
 );
