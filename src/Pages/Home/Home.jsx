@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppState } from '../../App';
 import axios from '../../axiosConfig';
 
+
 function Home() {
     const { user } = useContext(AppState);
     const navigate = useNavigate();
@@ -190,3 +191,4 @@ function Home() {
     );
 }
 
+export default Home;

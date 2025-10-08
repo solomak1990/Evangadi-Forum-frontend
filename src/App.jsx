@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovider/DataProvider.jsx";
 // import {UserContext} from "./component/Dataprovider/DataProvider"
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
 import Question from "./pages/Question/Question";
 import Register from "./pages/Register/Register";
-import Answer from "./pages/Answer/Answer";
-import axiosBase from "./axiosConfig";
+import Answer from "./Pages/Answer/Answer.jsx";
+ import axiosBase from "./axiosConfig";
 import Profile from "./component/Header/Profile";
 import NotFound from "./Pages/Login/Notfound";
 
