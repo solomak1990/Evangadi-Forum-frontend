@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import classes from "./questionlist.module.css"
-
+import { Circles } from "react-loader-spinner";
 const QuestionList = ({ token }) => {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
@@ -28,26 +28,30 @@ const QuestionList = ({ token }) => {
         setLoading(false);
       }
     };
-
     fetchQuestions();
   }, [token]);
 
-  if (loading) return <p className={classes.loadingMessage}>Loading questions...</p>;
-  if (error) return <p className={classes.errorMessage}>{error}</p>;
-
+  if (loading) return <Circles color="#00BFFF" height={80} width={80} />;
+  if (error) return <p>{error}</p>;
+  if (questions.length === 0)
+    return (
+      <p className={classes.emptyMessage}>
+        No questions available at the moment.
+      </p>
+    );
   return (
-    <div className={classes.questionListContainer}>
-      <h1 className={classes.questionLlistTitle}>All Questions</h1>
+    <div>
+      <h1 className={classes.questionListTitle}>All Questions</h1>
       {questions.map((q) => (
-        <div key={q.id} className={classes.questionCard}>
-          <h3 className={classes.question-title}>
-            <Link to={`/questions/${q.id}`} className={classes.questionLink}>
+        <div key={q.questionid} className={classes.questionCard}>
+          <h3 className={classes.questionTitle}>
+            <Link to={`/questions/${q.questionid}`} className={classes.questionLink}>
               {q.title}
             </Link>
           </h3>
-          <p className={classes.questionSnippet}>{q.description?.slice(0, 100)}...</p>
+          <p >{q.description?.slice(0, 100)}...</p>
           <p className={classes.questionMeta}>
-            <strong>Posted by:</strong> {q.user_name} |{" "}
+            <strong>Posted by:</strong> {q.username} |{" "}
             {new Date(q.created_at).toLocaleString()}
           </p>
         </div>
