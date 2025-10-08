@@ -14,10 +14,10 @@ const rootElement = document.getElementById("root");
 
 createRoot(rootElement).render(
   <React.StrictMode>
-    {/* <UserProvider value={initialUserData}> */}
+    <UserProvider value={initialUserData}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    {/* </UserProvider> */}
+    </UserProvider>
   </React.StrictMode>
 );

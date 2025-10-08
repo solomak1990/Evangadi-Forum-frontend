@@ -1,5 +1,6 @@
 import React from "react";
 // import profile from "../../Images/User.png";
+const profile = "https://via.placeholder.com/48x48.png?text=U";
 const Answer = ({ answer, userName }) => {
   return (
     <div>
