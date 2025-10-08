@@ -1,0 +1,161 @@
+
+.pageWrapper {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.loginPageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+}
+
+.loginLeft,
+.loginRight {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.loginLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 2;
+}
+
+.loginHeading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.loginBox p {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.loginBox a {
+  color: #ff7f2a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.loginBox input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.loginFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #5861ae;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #3f489b;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* About Section */
+
+
+.aboutSection {
+  max-width: 600px;
+  z-index: 2;
+  position: relative;
+}
+
+.aboutTitle {
+  color: #ff7f2a;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.aboutHeading {
+  color: #3b2063;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.aboutText {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.aboutButton {
+  background-color: #ff7f2a;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.aboutButton:hover {
+  background-color: #e66b1e;
+} 
+
+.blueShape {
+  position: absolute;
+  top: 100px;
+  left: 80px;
+  width: 200px;
+  height: 200px;
+  background: #bfc9f8;
+  border-top-right-radius: 60%;
+  z-index: 0;
+}
+
+.pinkShape {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  height: 200px;
+  background: #ffdbd2;
+  border-top-left-radius: 80%;
+  z-index: 0;
+} 

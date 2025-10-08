@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovide/DataProvider";
 import Home from "./pages/Home/Home";
-import Login from "./pages/login/login";
+import Login from "./Pages/Login/Login";
 import axios from "./axiosConfig";
 import Question from "./pages/Question/Question";
 import Register from "./pages/Register/Register";
@@ -10,16 +10,13 @@ import Answer from "./pages/Answer/Answer";
 import axiosBase from "./axiosConfig";
 import Profile from "./component/Header/Profile";
 import NotFound from "./pages/login/Notfound";
-import Footer from "./component/Footer/Footer";
 
 export const AppState = createContext();
-
 function App() {
   const [userData, setUserData] = useContext(UserContext);
   let token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [user, setUser] = useState();
-
   const checkUser2 = async () => {
     try {
       const { data } = await axios.get("/users/check", {
@@ -36,7 +33,7 @@ function App() {
     }
   };
 
-  console.log(userData.user.display_name.length ,"kkkk")
+  
   useEffect(() => {
     checkUser2();
   }, []);
@@ -56,5 +53,4 @@ function App() {
     </AppState.Provider>
   );
 }
-
 export default App;
