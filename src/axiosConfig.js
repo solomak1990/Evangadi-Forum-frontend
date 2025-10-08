@@ -4,3 +4,4 @@ const axiosBase = axios.create({
   baseURL: "http://localhost:2025/",
 });
 export default axiosBase;
+
