@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import classes from "./questionlist.module.css"
-import { Circles } from "react-loader-spinner";
+
 const QuestionList = ({ token }) => {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
@@ -31,7 +31,7 @@ const QuestionList = ({ token }) => {
     fetchQuestions();
   }, [token]);
 
-  if (loading) return <Circles color="#00BFFF" height={80} width={80} />;
+ 
   if (error) return <p>{error}</p>;
   if (questions.length === 0)
     return (
