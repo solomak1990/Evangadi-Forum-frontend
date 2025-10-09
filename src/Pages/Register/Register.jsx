@@ -50,7 +50,7 @@ function Register() {
     <section>
       <form onSubmit={handleSubmit}>
         <div>
-          <span>User Nname :---</span>
+          <span>User Name :---</span>
           <input ref={userNameDom} type="text" placeholder="User Name" />
         </div>
         <br />
