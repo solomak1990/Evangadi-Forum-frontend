@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppState } from '../../App';
 import axios from '../../axiosConfig';
+import styles from './home.module.css';
 
 
 function Home() {
@@ -48,29 +49,29 @@ function Home() {
 
     if (loading) {
         return (
-            <div style={styles.loading}>
-                <div style={styles.spinner}></div>
+            <div className={styles.loading}>
+                <div className={styles.spinner}></div>
                 Loading questions...
             </div>
         );
     }
 
     return (
-        <div style={styles.container}>
+        <div className={styles.container}>
             {/* Header - Full width */}
-            <header style={styles.header}>
-                <div style={styles.headerContent}>
-                    <div style={styles.headerLeft}>
-                        <div style={styles.logoContainer}>
-                            <span style={styles.logoText}>EVANGADI</span>
+            <header className={styles.header}>
+                <div className={styles.headerContent}>
+                    <div className={styles.headerLeft}>
+                        <div className={styles.logoContainer}>
+                            <span className={styles.logoText}>EVANGADI</span>
                         </div>
                     </div>
                     
-                    <div style={styles.headerRight}>
-                        <span style={styles.navItem}>How it works</span>
+                    <div className={styles.headerRight}>
+                        <span className={styles.navItem}>How it works</span>
                         <button 
                             onClick={handleLogout}
-                            style={styles.logoutButton}
+                            className={styles.logoutButton}
                         >
                             LOG OUT
                         </button>
@@ -79,28 +80,28 @@ function Home() {
             </header>
 
             {/* Main Content - Full width with proper padding */}
-            <main style={styles.main}>
+            <main className={styles.main}>
                 {/* Top Section */}
-                <div style={styles.topSection}>
+                <div className={styles.topSection}>
                     <button 
                         onClick={handleAskQuestion}
-                        style={styles.askButton}
+                        className={styles.askButton}
                     >
                         Ask Question
                     </button>
                     
-                    <span style={styles.welcomeText}>
-                        Welcome: <span style={styles.username}>{user?.username || 'Guest'}</span>
+                    <span className={styles.welcomeText}>
+                        Welcome: <span className={styles.username}>{user?.username || 'Guest'}</span>
                     </span>
                 </div>
 
                 {/* Error Message */}
                 {error && (
-                    <div style={styles.errorContainer}>
-                        <span style={styles.errorText}>{error}</span>
+                    <div className={styles.errorContainer}>
+                        <span className={styles.errorText}>{error}</span>
                         <button 
                             onClick={handleRefresh}
-                            style={styles.retryButton}
+                            className={styles.retryButton}
                         >
                             Retry
                         </button>
@@ -108,23 +109,23 @@ function Home() {
                 )}
 
                 {/* Questions List */}
-                <div style={styles.questionsContainer}>
+                <div className={styles.questionsContainer}>
                     {questions.length === 0 ? (
-                        <div style={styles.noQuestions}>
-                            <p style={styles.noQuestionsText}>No questions yet. Be the first to ask!</p>
+                        <div className={styles.noQuestions}>
+                            <p className={styles.noQuestionsText}>No questions yet. Be the first to ask!</p>
                             <button 
                                 onClick={handleAskQuestion}
-                                style={styles.askButton}
+                                className={styles.askButton}
                             >
                                 Ask First Question
                             </button>
                         </div>
                     ) : (
                         questions.map((question, index) => (
-                            <div key={question.id} style={styles.questionItem}>
+                            <div key={question.id} className={styles.questionItem}>
                                 <div 
                                     onClick={() => handleQuestionClick(question.id)}
-                                    style={styles.questionContent}
+                                    className={styles.questionContent}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.backgroundColor = '#f8f9fa';
                                     }}
@@ -132,33 +133,33 @@ function Home() {
                                         e.currentTarget.style.backgroundColor = 'white';
                                     }}
                                 >
-                                    <div style={styles.questionLayout}>
+                                    <div className={styles.questionLayout}>
                                         {/* Profile Section */}
-                                        <div style={styles.profileSection}>
-                                            <div style={styles.profileCircle}>
+                                        <div className={styles.profileSection}>
+                                            <div className={styles.profileCircle}>
                                                 {question.user?.username?.charAt(0)?.toUpperCase() || '👤'}
                                             </div>
-                                            <div style={styles.userName}>
+                                            <div className={styles.userName}>
                                                 {question.user?.username}
                                             </div>
                                         </div>
                                         
                                         {/* Question Content */}
-                                        <div style={styles.questionText}>
-                                            <h3 style={styles.questionTitle}>{question.title}</h3>
+                                        <div className={styles.questionText}>
+                                            <h3 className={styles.questionTitle}>{question.title}</h3>
                                             {question.description && (
-                                                <p style={styles.questionDescription}>
+                                                <p className={styles.questionDescription}>
                                                     {question.description.length > 150 
                                                         ? `${question.description.substring(0, 150)}...` 
                                                         : question.description
                                                     }
                                                 </p>
                                             )}
-                                            <div style={styles.questionMeta}>
-                                                <span style={styles.answerCount}>
+                                            <div className={styles.questionMeta}>
+                                                <span className={styles.answerCount}>
                                                     {question.answersCount || 0} answers
                                                 </span>
-                                                <span style={styles.questionDate}>
+                                                <span className={styles.questionDate}>
                                                     {new Date(question.createdAt).toLocaleDateString()}
                                                 </span>
                                             </div>
@@ -168,7 +169,7 @@ function Home() {
                                 
                                 {/* Separator line */}
                                 {index < questions.length - 1 && (
-                                    <hr style={styles.separator} />
+                                    <hr className={styles.separator} />
                                 )}
                             </div>
                         ))
@@ -177,10 +178,10 @@ function Home() {
 
                 {/* Refresh Button */}
                 {questions.length > 0 && (
-                    <div style={styles.refreshSection}>
+                    <div className={styles.refreshSection}>
                         <button 
                             onClick={handleRefresh}
-                            style={styles.refreshButton}
+                            className={styles.refreshButton}
                         >
                             Refresh Questions
                         </button>
