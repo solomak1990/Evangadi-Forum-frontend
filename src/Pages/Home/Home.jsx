@@ -20,8 +20,8 @@ function Home() {
         try {
             setLoading(true);
             setError('');
-            const { data } = await axios.get('/questions');
-            setQuestions(data);
+            const { data } = await axios.get('api/question');
+            setQuestions(data.questions || []);
         } catch (error) {
             console.error('Error fetching questions:', error);
             setError('Failed to load questions. Please try again.');
@@ -31,7 +31,7 @@ function Home() {
     };
 
     const handleAskQuestion = () => {
-        navigate('/ask');
+        navigate('/question');
     };
 
     const handleLogout = () => {
@@ -40,7 +40,7 @@ function Home() {
     };
 
     const handleQuestionClick = (questionId) => {
-        navigate(`/answers/${questionId}`);
+        navigate(`/question/${questionId}`);
     };
 
     const handleRefresh = () => {
@@ -137,30 +137,30 @@ function Home() {
                                         {/* Profile Section */}
                                         <div className={styles.profileSection}>
                                             <div className={styles.profileCircle}>
-                                                {question.user?.username?.charAt(0)?.toUpperCase() || '👤'}
+                                                {question.user_name?.charAt(0)?.toUpperCase() || '👤'}
                                             </div>
                                             <div className={styles.userName}>
-                                                {question.user?.username}
+                                                {question.user_name}
                                             </div>
                                         </div>
                                         
                                         {/* Question Content */}
                                         <div className={styles.questionText}>
                                             <h3 className={styles.questionTitle}>{question.title}</h3>
-                                            {question.description && (
+                                            {question.content && (
                                                 <p className={styles.questionDescription}>
-                                                    {question.description.length > 150 
-                                                        ? `${question.description.substring(0, 150)}...` 
-                                                        : question.description
+                                                    {question.content.length > 150 
+                                                        ? `${question.content.substring(0, 150)}...` 
+                                                        : question.content
                                                     }
                                                 </p>
                                             )}
                                             <div className={styles.questionMeta}>
                                                 <span className={styles.answerCount}>
-                                                    {question.answersCount || 0} answers
+                                                    0 answers
                                                 </span>
                                                 <span className={styles.questionDate}>
-                                                    {new Date(question.createdAt).toLocaleDateString()}
+                                                    {new Date().toLocaleDateString()}
                                                 </span>
                                             </div>
                                         </div>

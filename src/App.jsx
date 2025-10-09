@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovider/DataProvider.jsx";
-// import Home from "./Pages/Home/Home.jsx";
+import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
 import Question from "./Pages/Question/Question.jsx"
@@ -22,13 +22,13 @@ function App() {
   const [user, setUser] = useState();
   const checkUser2 = async () => {
     try {
-      const { data } = await axios.get("/users/check", {
+      const { data } = await axios.get("api/users/checkUser", {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
-      setUserData({ data });
-      setUserData({ data });
+      setUserData({ user: data, token: token });
+      setUser(data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -38,22 +38,21 @@ function App() {
 
   
   useEffect(() => {
-    checkUser2();
+
+  if(token){
+  checkUser2();
+  }
+  else{
+    navigate("/login");
+  }
+    
   }, []);
   return (
     <AppState.Provider value={{ user, setUser }}>
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/question" element={<Question />} />
-      <Route path="/question/:id" element={<Answer />} />
-      {/* <Route path="/profile" element={<Profile />} /> */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/question" element={<Question />} />
         <Route path="/question/:id" element={<Answer />} />
@@ -65,3 +64,7 @@ function App() {
   );
 }
 export default App;
+
+
+
+
