@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovider/DataProvider.jsx";
-// import Home from "./Pages/Home/Home.jsx";
+import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
 import Question from "./Pages/Question/Question.jsx"
 import Register from "./Pages/Register/Register.jsx"
 import Answer from "./Pages/Answer/Answer.jsx";
- import axiosBase from "./axiosConfig";
-import Profile from "./component/Header/Profile";
 import NotFound from "./Pages/Login/Notfound";
 import QuestionList from "./Pages/QuestionList/QuestionList"
 
@@ -20,9 +18,9 @@ function App() {
   let token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  const checkUser2 = async () => {
+  const checkUser = async () => {
     try {
-      const { data } = await axios.get("/users/check", {
+      const { data } = await axios.get("/user/checkUser", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -31,14 +29,14 @@ function App() {
       setUserData({ data });
       console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       navigate("/login");
     }
   };
 
   
   useEffect(() => {
-    checkUser2();
+    checkUser();
   }, []);
   return (
     <AppState.Provider value={{ user, setUser }}>
@@ -48,20 +46,9 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/question" element={<Question />} />
       <Route path="/question/:id" element={<Answer />} />
-      {/* <Route path="/profile" element={<Profile />} /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/question" element={<Question />} />
-        <Route path="/question/:id" element={<Answer />} />
-        <Route path="/allquestion" element={<QuestionList />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </AppState.Provider>
+        </AppState.Provider>
   );
 }
 export default App;
