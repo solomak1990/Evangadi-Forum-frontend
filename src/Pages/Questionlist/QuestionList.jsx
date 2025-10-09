@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axiosConfig";
+import Layout from "../../component/Layout/Layout";
 import classes from "./questionlist.module.css"
 
 const QuestionList = ({ token }) => {
@@ -13,7 +14,7 @@ const QuestionList = ({ token }) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get("/api/allquestion", {
+        const res = await axios.get("api/question", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.data.questions && Array.isArray(res.data.questions)) {
@@ -40,23 +41,25 @@ const QuestionList = ({ token }) => {
       </p>
     );
   return (
-    <div>
-      <h1 className={classes.questionListTitle}>All Questions</h1>
-      {questions.map((q) => (
-        <div key={q.questionid} className={classes.questionCard}>
-          <h3 className={classes.questionTitle}>
-            <Link to={`/questions/${q.questionid}`} className={classes.questionLink}>
-              {q.title}
-            </Link>
-          </h3>
-          <p >{q.description?.slice(0, 100)}...</p>
-          <p className={classes.questionMeta}>
-            <strong>Posted by:</strong> {q.username} |{" "}
-            {new Date(q.created_at).toLocaleString()}
-          </p>
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <div className={classes.container}>
+        <h1 className={classes.questionListTitle}>All Questions</h1>
+        {questions.map((q) => (
+          <div key={q.question_id} className={classes.questionCard}>
+            <h3 className={classes.questionTitle}>
+              <Link to={`/question/${q.question_id}`} className={classes.questionLink}>
+                {q.title}
+              </Link>
+            </h3>
+            <p className={classes.questionDescription}>{q.content?.slice(0, 100)}...</p>
+            <p className={classes.questionMeta}>
+              <strong>Posted by:</strong> {q.user_name} |{" "}
+              {new Date().toLocaleString()}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Layout>
   );
 };
 
