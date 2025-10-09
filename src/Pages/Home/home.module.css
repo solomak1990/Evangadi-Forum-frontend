@@ -1,0 +1,456 @@
+/* .container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.header {
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6b00;
+    font-family: Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.navItem {
+    color: #666;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logoutButton {
+    background-color: transparent;
+    border: 1px solid #333;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.logoutButton:hover {
+    background-color: #333;
+    color: white;
+}
+
+.main {
+    width: 90%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0;
+}
+
+.topSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.askButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    min-width: 140px;
+}
+
+.askButton:hover {
+    background-color: #0056b3;
+}
+
+.welcomeText {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.username {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.questionsContainer {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.questionItem {
+    padding: 0;
+    width: 100%;
+}
+
+.questionContent {
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.questionLayout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.profileSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.profileCircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 2px solid #e0e0e0;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.userName {
+    color: #ff9800;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.questionText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.questionTitle {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    word-break: break-word;
+}
+
+.questionDescription {
+    margin: 0 0 0.5rem 0;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.questionMeta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.answerCount {
+    font-weight: 500;
+}
+
+.questionDate {
+    color: #999;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0;
+}
+
+.noQuestions {
+    text-align: center;
+    padding: 4rem 2rem;
+    width: 100%;
+}
+
+.noQuestionsText {
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    font-size: 18px;
+    color: #666;
+    width: 100%;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.errorContainer {
+    background-color: #ffeaa7;
+    border: 1px solid #fdcb6e;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.errorText {
+    color: #e17055;
+    font-weight: 500;
+}
+
+.retryButton {
+    background-color: #e17055;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.retryButton:hover {
+    background-color: #d35400;
+}
+
+.refreshSection {
+    text-align: center;
+    width: 100%;
+}
+
+.refreshButton {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.refreshButton:hover {
+    background-color: #545b62;
+} */
+
+/* Spinner animation */
+/* @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+} */
+
+
+/* Container for the entire page content */
+.container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Top Section --- */
+
+.topSection {
+  display: none; /* Hide the current structured top section to match the image layout */
+}
+
+/* --- Welcome + Search Section (Adjusted) --- */
+
+.userActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Start from the left */
+  margin-bottom: 20px;
+}
+
+.welcomeText {
+  align-self: flex-end; /* Pushes the 'Welcome' text to the right side */
+  font-size: 1.1rem;
+  color: #333;
+  margin-right: 20px; /* Space from the right edge */
+  margin-bottom: 20px; /* Space below the welcome text */
+}
+
+.username {
+  font-weight: bold;
+  color: #d17805; /* Use a color similar to 'saron' in the image */
+}
+
+/* --- Ask Question Button --- */
+/* The button is moved here as it's structurally closer to the search bar in the image */
+
+.askButtonContainer {
+  /* A container to align the Ask Question button */
+  margin-bottom: 10px; /* Space above the search bar */
+}
+
+.askButton {
+  background-color: #007bff; /* A prominent blue color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.askButton:hover {
+  background-color: #0056b3;
+}
+
+/* --- Search Bar --- */
+
+.searchBox {
+  display: flex;
+  width: 100%;
+  margin-bottom: 40px; /* Space between search and question list */
+}
+
+.searchBox input {
+  flex-grow: 1; /* Take up all available space */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  /* Remove the default search button for the image look, but keep the input style */
+}
+
+.searchBox input::placeholder {
+  color: #999;
+}
+
+.searchBox button {
+  display: none; /* Hide the search button to match the image where only input is present */
+}
+
+
+/* --- Question List Items (Assuming QuestionList component uses its own class/structure) --- */
+/* This section styles the individual question previews to look like the image */
+
+.questionsSection {
+  width: 100%;
+}
+
+.sectionHeader {
+  display: none; /* Hide the "Recent Questions" header to match the image */
+}
+
+/* Styling for an individual question item - you might need to apply these in your QuestionList component */
+.questionItem {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee; /* Separator line between questions */
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+.questionItem:hover {
+  background-color: #f9f9f9;
+}
+
+.profileIcon {
+  font-size: 2.5rem; /* Larger icon */
+  color: #888;
+  margin-right: 15px;
+}
+
+.questionContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* Align question text and name */
+}
+
+.usernameDisplay {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+.questionTitle {
+  font-size: 1.1rem;
+  color: #007bff; /* Blue question link color */
+  font-weight: 400;
+  text-decoration: none; /* Remove underline from the link */
+}
+
+.arrowIcon {
+  font-size: 1.5rem;
+  color: #555;
+  margin-left: 15px;
+}

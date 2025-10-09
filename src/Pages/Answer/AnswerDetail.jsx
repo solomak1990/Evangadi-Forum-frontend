@@ -1,0 +1,76 @@
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import classes from "./answer.module.css";
+
+const AnswerQuestion = ({ questionId }) => {
+  const [userData] = useContext(UserContext);
+  const [form, setForm] = useState({ answer: "" });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!userData?.user?.id) {
+      alert("Please log in to post an answer.");
+      navigate("/login");
+      return;
+    }
+
+    if (!form.answer.trim()) {
+      alert("Please enter your answer before submitting.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/answer`,
+        {
+          id: userData.user.id,
+          questionId,
+          answer: form.answer,
+        },
+        {
+          headers: { Authorization: `Bearer ${userData.token}` },
+        }
+      );
+
+      setForm({ answer: "" });
+      alert("Your answer was posted successfully!");
+    } catch (err) {
+      console.error("Problem posting answer:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <div className={classes.container}>
+      <form onSubmit={handleSubmit} className={classes.answerForm}>
+        <h3 className={classes.formTitle}>Answer The Top Question</h3>
+
+        <Link to="/" className={classes.backLink}>
+          Go to Question Page
+        </Link>
+
+        <textarea
+          onChange={handleChange}
+          value={form.answer}
+          className={classes.answerInput}
+          placeholder="Your Answer..."
+          name="answer"
+        />
+
+        <button className={classes.answerButton} type="submit">
+          Post Your Answer
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default AnswerQuestion;
