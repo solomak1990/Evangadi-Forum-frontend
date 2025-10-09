@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import RingLoader from "./RingLoader/RingLoader";
 import Layout from "./Layout/Layout";
-import classes from "./SingleQuestion.module.css";
+import classes from "./questionlist.module.css";
 
 const SingleQuestion = ({ token }) => {
   const { id } = useParams();

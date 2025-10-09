@@ -1,19 +1,15 @@
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovider/DataProvider.jsx";
-// import {UserContext} from "./component/Dataprovider/DataProvider"
-import Home from "./pages/Home/Home.jsx";
+// import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
-import Question from "./pages/Question/Question";
-import Register from "./pages/Register/Register";
+import Question from "./Pages/Question/Question.jsx"
+import Register from "./Pages/Register/Register.jsx"
 import Answer from "./Pages/Answer/Answer.jsx";
- import axiosBase from "./axiosConfig";
-import Profile from "./component/Header/Profile";
+// import Profile from "./component/Header/Profile";
 import NotFound from "./Pages/Login/Notfound";
 
-// import Profile from "./component/Header/Profile";
-// import NotFound from "./pages/login/Notfound";
 export const AppState = createContext();
 function App() {
   const [userData, setUserData] = useContext(UserContext);
@@ -50,7 +46,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/question" element={<Question />} />
       <Route path="/question/:id" element={<Answer />} />
-      <Route path="/profile" element={<Profile />} />
+      {/* <Route path="/profile" element={<Profile />} /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
     </AppState.Provider>
