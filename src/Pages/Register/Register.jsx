@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import axiosBase from "../../axiosConfig";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
 import styles from "./register.module.css";
-import { setToken } from "../../utils/tokenHelper"; // Import the token helper
 
 function Register() {
   const navigate = useNavigate();
@@ -12,6 +12,8 @@ function Register() {
   const lastnameDom = useRef();
   const emailDom = useRef();
   const passwordDom = useRef();
+  const [showPassword, setShowPassword] = useState(false);
+  const [agree, setAgree] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,20 +32,16 @@ function Register() {
       alert("Please provide all required information");
       return;
     }
-
-    // Log data for debugging
-    console.log("Registration attempt:", {
-      username: usernameValue,
-      first_name: firstValue,
-      last_name: lastValue,
-      email: emailValue,
-    });
+    if (!agree) {
+      alert("Please agree to the privacy policy and terms of service.");
+      return;
+    }
 
     try {
       await axiosBase.post("api/user/register", {
         username: usernameValue,
-        firstname: firstValue,
-        lastname: lastValue,
+        first_name: firstValue,
+        last_name: lastValue,
         email: emailValue,
         password: passValue,
       });
@@ -61,71 +59,82 @@ function Register() {
     <Layout>
       <section className={styles.registerSection}>
         <div className={styles.registerContainer}>
-          <h2 className={styles.registerTitle}>Create Account</h2>
+          <h2 className={styles.registerTitle}>Join the network</h2>
           <p className={styles.registerSubtitle}>
             Already have an account? <Link to="/login">Sign in</Link>
           </p>
           
           <form onSubmit={handleSubmit} className={styles.registerForm}>
             <div className={styles.formGroup}>
-              <span className={styles.label}>User Name</span>
               <input 
                 ref={userNameDom} 
                 type="text" 
-                placeholder="User Name" 
+                placeholder="Username" 
                 className={styles.input}
                 required
               />
             </div>
-            
-            <div className={styles.formGroup}>
-              <span className={styles.label}>First Name</span>
+
+            <div className={styles.rowGroup}>
               <input
                 ref={firstnameDom}
                 type="text"
-                placeholder="First Name"
+                placeholder="First name"
                 className={styles.input}
                 required
               />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <span className={styles.label}>Last Name</span>
               <input
                 ref={lastnameDom}
                 type="text"
-                placeholder="Last Name"
+                placeholder="Last name"
                 className={styles.input}
                 required
               />
             </div>
-            
+
             <div className={styles.formGroup}>
-              <span className={styles.label}>Email</span>
               <input 
                 ref={emailDom} 
                 type="email" 
-                placeholder="Email" 
+                placeholder="Email address" 
                 className={styles.input}
                 required 
               />
             </div>
-            
+
             <div className={styles.formGroup}>
-              <span className={styles.label}>Password</span>
-              <input
-                ref={passwordDom}
-                type="password"
-                placeholder="Password"
-                className={styles.input}
-                required
-              />
+              <div className={styles.passwordWrapper}>
+                <input
+                  ref={passwordDom}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className={styles.input}
+                  required
+                />
+                <button
+                  type="button"
+                  className={styles.eyeButton}
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
             </div>
-            
+
+            <div className={styles.consentRow}>
+              <label>
+                <input type="checkbox" checked={agree} onChange={() => setAgree(!agree)} />
+                <span> I agree to the <a href="#">privacy policy</a> and <a href="#">terms of service</a>.</span>
+              </label>
+            </div>
+
             <button type="submit" className={styles.registerButton}>
-              Create Account
+              Agree and Join
             </button>
           </form>
+
+          <p className={styles.bottomLink}>Already have an account?</p>
         </div>
       </section>
     </Layout>
