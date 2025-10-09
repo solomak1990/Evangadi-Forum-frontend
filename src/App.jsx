@@ -78,7 +78,7 @@ import Question from "./Pages/Question/Question.jsx";
 import Register from "./Pages/Register/Register.jsx";
 import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound";
-import QuestionList from "./Pages/QuestionList/QuestionList";
+import QuestionList from "./Pages/Questionlist/QuestionList";
 
 // import Profile from "./component/Header/Profile";
 // import NotFound from "./pages/login/Notfound";
