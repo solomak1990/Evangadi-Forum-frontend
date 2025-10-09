@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import axiosBase from "../../axiosConfig";
-import { useNavigate } from "react-router-dom";
-import "./register.module.css";
+import { useNavigate, Link } from "react-router-dom";
+import Layout from "../../component/Layout/Layout";
+import styles from "./register.module.css";
 
 function Register() {
-  
+  const navigate = useNavigate();
   const userNameDom = useRef();
   const firstnameDom = useRef();
   const lastnameDom = useRef();
@@ -30,15 +31,16 @@ function Register() {
     }
 
     try {
-      await axiosBase.post("/users/register", {
+      await axiosBase.post("api/user/register", {
         username: usernameValue,
-        firstname: firstValue,
-        lastname: lastValue,
+        first_name: firstValue,
+        last_name: lastValue,
         email: emailValue,
         password: passValue,
       });
       
       alert("Registration successful. Please log in.");
+      navigate("/login");
     } catch (error) {
       
       const message = error.response?.data?.message || "Something went wrong!";
@@ -47,50 +49,77 @@ function Register() {
     }
   }
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <span>User Name :---</span>
-          <input ref={userNameDom} type="text" placeholder="User Name" />
+    <Layout>
+      <section className={styles.registerSection}>
+        <div className={styles.registerContainer}>
+          <h2 className={styles.registerTitle}>Create Account</h2>
+          <p className={styles.registerSubtitle}>
+            Already have an account? <Link to="/login">Sign in</Link>
+          </p>
+          
+          <form onSubmit={handleSubmit} className={styles.registerForm}>
+            <div className={styles.formGroup}>
+              <span className={styles.label}>User Name</span>
+              <input 
+                ref={userNameDom} 
+                type="text" 
+                placeholder="User Name" 
+                className={styles.input}
+                required
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <span className={styles.label}>First Name</span>
+              <input
+                ref={firstnameDom}
+                type="text"
+                placeholder="First Name"
+                className={styles.input}
+                required
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <span className={styles.label}>Last Name</span>
+              <input
+                ref={lastnameDom}
+                type="text"
+                placeholder="Last Name"
+                className={styles.input}
+                required
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <span className={styles.label}>Email</span>
+              <input 
+                ref={emailDom} 
+                type="email" 
+                placeholder="Email" 
+                className={styles.input}
+                required 
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <span className={styles.label}>Password</span>
+              <input
+                ref={passwordDom}
+                type="password"
+                placeholder="Password"
+                className={styles.input}
+                required
+              />
+            </div>
+            
+            <button type="submit" className={styles.registerButton}>
+              Create Account
+            </button>
+          </form>
         </div>
-        <br />
-        <div>
-          <span>First Name :---</span>
-          <input
-            ref={firstnameDom}
-            type="text"
-            placeholder="First Name"
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <span>Last Name :--- </span>
-          <input
-            ref={lastnameDom}
-            type="text"
-            placeholder="Last Name"
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <span>Email :---</span>
-          <input ref={emailDom} type="email" placeholder="Email" required />
-        </div>
-        <br />
-        <div>
-          <span>Password :--- </span>
-          <input
-            ref={passwordDom}
-            type="password"
-            placeholder="Password"
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </section>
+      </section>
+    </Layout>
   );
 }
 

@@ -14,7 +14,7 @@ const QuestionDetail = () => {
   const fetchQuestion = async () => {
     try {
       const token = localStorage.getItem("auth-token"); // Access token from storage
-      const res = await axios.get(`/questions/singlequestion/${id}`, {
+      const res = await axios.get(`api/question/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
       setQuestion(res.data);
@@ -28,7 +28,7 @@ const QuestionDetail = () => {
   const fetchAnswers = async () => {
     try {
       const token = localStorage.getItem("auth-token");
-      const res = await axios.get(`/answers/question/${id}`, {
+      const res = await axios.get(`api/answer/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
       setAnswers(res.data);
@@ -54,7 +54,7 @@ const QuestionDetail = () => {
     try {
       const token = localStorage.getItem("auth-token");
       await axios.post(
-        "/answers/createanswer",
+        "api/answer",
         { questionid: id, answer: newAnswer }, // Send the question ID along with the answer in the request
         { headers: { Authorization: "Bearer " + token } }
       );
