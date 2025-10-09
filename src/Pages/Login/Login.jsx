@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './Login.module.css';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import styles from './login.module.css';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from '../../axiosConfig';
 import Layout from '../../component/Layout/Layout'; 
 
 const Login = () => {
@@ -30,18 +30,17 @@ const Login = () => {
     }
 
     try {
-      
-      const response = await axios.post('https://your-api.com/api/login', formData);
+      const response = await axios.post('api/user/login', formData);
 
-      if (response.data.success) {
-        
+      if (response.data.message === 'User login successful') {
         localStorage.setItem('token', response.data.token);
-        navigate('/dashboard'); 
+        navigate('/home'); 
+        
       } else {
         setErrorMsg(response.data.message || 'Login failed');
       }
     } catch (error) {
-      setErrorMsg('Invalid credentials or server error');
+      setErrorMsg(error.response?.data?.message || 'Invalid credentials or server error');
     }
   };
 
@@ -55,7 +54,7 @@ const Login = () => {
             <div className={styles.loginBox}>
               <h2 className={styles.loginHeading}>Login to your account</h2>
               <p>
-                Don’t have an account? <a href="/register">Create a new account</a>
+                Don't have an account? <Link to="/register">Create a new account</Link>
               </p>
 
               <form onSubmit={handleSubmit}>
@@ -76,7 +75,7 @@ const Login = () => {
                 />
 
                 <div className={styles.loginFooter}>
-                  <a href="/forgot-password">Forgot password?</a>
+                  <Link to="/forgot-password">Forgot password?</Link>
                 </div>
 
                 {errorMsg && <p className={styles.error}>{errorMsg}</p>}
