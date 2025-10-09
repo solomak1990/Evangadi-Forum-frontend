@@ -28,7 +28,7 @@ function login() {
         email: emailValue,
         password: passValue,
       });
-      // console.log(data);
+      console.log(data);
 
       // alert("login successfull.");
       localStorage.setItem("token", data.token);
