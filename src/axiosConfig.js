@@ -3,7 +3,7 @@ import axios from "axios";
 import { getToken, removeToken } from "./utils/tokenHelper";
 
 const axiosBase = axios.create({
-  baseURL: "http://forumevangadi.natesirak.com",
+  baseURL: "https://forumevangadibackend.natesirak.com",
 });
 
 // Add token to all requests automatically
