@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./header.module.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,9 +45,9 @@ const Navbar = () => {
         <a href="/" className={classes.link}>
           Home
         </a>
-        <a href="/how-it-works" className={classes.link}>
+        <Link to="/how-it-works" className={classes.link}>
           How it works
-        </a>
+        </Link>
         {isLoggedIn ? (
           <button className={classes.logoutBtn} onClick={handleAuthClick}>
             Log Out
