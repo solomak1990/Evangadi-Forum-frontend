@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './login.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../axiosConfig';
+import { UserContext } from '../../component/Dataprovider/DataProvider';
 import Layout from '../../component/Layout/Layout'; 
 
 const Login = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useContext(UserContext);
 
   
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
 
@@ -34,6 +37,7 @@ const Login = () => {
 
       if (response.data.message === 'User login successful') {
         localStorage.setItem('token', response.data.token);
+        setUserData({ ...(userData || {}), token: response.data.token });
         navigate('/home'); 
         
       } else {
@@ -67,12 +71,17 @@ const Login = () => {
                 />
 
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
                 />
+                <div style={{ marginTop: '6px' }}>
+                  <label style={{ fontSize: '12px' }}>
+                    <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> Show password
+                  </label>
+                </div>
 
                 <div className={styles.loginFooter}>
                   <Link to="/forgot-password">Forgot password?</Link>
