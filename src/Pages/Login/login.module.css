@@ -1,6 +1,4 @@
 
-
-/* zzzz */
 .pageWrapper {
   background-color: #fff;
   min-height: 100vh;
@@ -10,7 +8,7 @@
   overflow: hidden;
 }
 
-/* ===== Layout ===== */
+/*  Layout  */
 .loginPageContainer {
   display: flex;
   justify-content: center;
@@ -35,7 +33,7 @@
   align-items: center;
 }
 
-/* ===== Login Box ===== */
+/* Login Box */
 .loginBox {
   background-color: #fff;
   padding: 40px 30px;
@@ -102,7 +100,7 @@
   margin-bottom: 10px;
 }
 
-/* ===== About Section ===== */
+/* About Section  */
 .aboutSection {
   max-width: 600px;
   position: relative;
@@ -143,8 +141,6 @@
 .aboutButton:hover {
   background-color: #e66b1e;
 }
-
-/* ===== Shapes ===== */
 .blueShape {
   position: absolute;
   top: 0;
@@ -155,7 +151,6 @@
   border-bottom-left-radius: 60%;
   z-index: 0;
 }
-
 .pinkShape {
   position: absolute;
   bottom: 0;
@@ -166,24 +161,21 @@
   border-top-left-radius: 80%;
   z-index: 0;
 }
-/* ===== Responsive Design ===== */
+/* Responsive Design */
 @media screen and (max-width: 992px) {
   .loginPageContainer {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-
   .loginLeft,
   .loginRight {
     padding: 10px;
   }
-
   .aboutSection {
     order: 2;
     margin-top: 30px;
   }
-
   .loginLeft {
     order: 1;
   }
