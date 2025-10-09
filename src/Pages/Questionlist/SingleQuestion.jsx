@@ -1,103 +1,181 @@
-import React, { useEffect, useState } from "react";
+// 
+
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../../axiosConfig";
-import Loader from "../Loader/Loader";
-import Layout from "./Layout/Layout";
-import classes from "./questionlist.module.css";
+import Layout from "../../component/Layout/Layout"; // Assuming you use Layout
+import classes from "./SingleQuestion.module.css"; // New CSS module
 
-const SingleQuestion = ({ token }) => {
+const SingleQuestion = () => {
+  // Renamed from QuestionDetail
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [answers, setAnswers] = useState([]);
   const [newAnswer, setNewAnswer] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchQuestion = async () => {
-      try {
-        const res = await axios.get(`/api/question/${id}`); // <-- fixed variable
-        if (res.data) {
-          // <-- match backend response
-          setQuestion(res.data);
-        } else {
-          setError("We cannot find the Question");
-        }
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load question.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Helper function to get token
+  const getToken = () => localStorage.getItem("auth-token");
 
-    fetchQuestion();
-  }, [id]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (newAnswer === "" || newAnswer === " ") {
-      alert("Answer cannot be empty");
-      return;
-    }
-
+  // Fetch question details
+  const fetchQuestion = async () => {
     try {
-      const res = await axios.post(
-        `/api/answer`,
-        { question_id: id, answer: newAnswer },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      const updatedAnswers = question.answers
-        ? question.answers.concat(res.data.answer)
-        : [res.data.answer];
-
-      setQuestion({ ...question, answers: updatedAnswers });
-
-      setNewAnswer("");
+      const token = getToken();
+      const res = await axios.get(`api/question/${id}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      // The API response for a single question usually includes all its answers
+      // If your API does this, you only need to call fetchQuestion.
+      // Assuming your API separates question and answers, we keep both calls for safety.
+      setQuestion(res.data);
     } catch (err) {
-      console.error(err);
-      alert("Failed to post answer.");
+      console.error("Error fetching question:", err);
+      setError("Failed to load question");
     }
   };
 
-  if (loading) return <Loader />;
-  if (error) return <p className={classes.error}>{error}</p>;
+  // Fetch answer data for the given question
+  const fetchAnswers = async () => {
+    try {
+      const token = getToken();
+      const res = await axios.get(`api/answer/${id}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      setAnswers(res.data);
+    } catch (err) {
+      console.error("Error fetching answers:", err);
+      setAnswers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Perform data fetching when component loads or ID changes
+  useEffect(() => {
+    fetchQuestion();
+    fetchAnswers();
+  }, [id]);
+
+  // Provide a new response
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!newAnswer.trim()) return;
+
+    try {
+      const token = getToken();
+      const res = await axios.post(
+        "api/answer",
+        { questionid: id, answer: newAnswer },
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      setNewAnswer("");
+      // Add the new answer to the state immediately instead of re-fetching everything
+      // NOTE: This assumes res.data is the new answer object including 'username' and 'answerid'
+      setAnswers((prev) => [...prev, res.data]);
+    } catch (err) {
+      console.error("Error submitting answer:", err);
+      setError("Failed to submit answer");
+    }
+  };
+
+  if (loading)
+    return (
+      <Layout>
+        <div>Loading...</div>
+      </Layout>
+    );
+  if (error)
+    return (
+      <Layout>
+        <div className="alert alert-danger">{error}</div>
+      </Layout>
+    );
 
   return (
     <Layout>
-      <div className={classes.singleQuestionContainer}>
-        <div className={classes.questionCard}>
-          <h2 className={classes.questionTitle}>{question.title}</h2>
-          <p className={classes.questionDescription}>{question.description}</p>
-          <p>
-            <strong>Posted by:</strong> {question.username}
-          </p>
-        </div>
+      <div className={classes.container}>
+        {/* ========================================
+        Question Section
+        ========================================
+      */}
+        {question && (
+          <div className={classes.questionSection}>
+            <p className={classes.topText}>Question</p>
+            <div className={classes.questionCard}>
+              {/* Left Side: Profile Icon and Username */}
+              <div className={classes.profileGroup}>
+                <div className={classes.profileIcon}>
+                  <i className="fa fa-user-circle"></i>
+                </div>
+                <p className={classes.usernameDisplay}>
+                  {question.username || "Anonymous"}
+                </p>
+              </div>
 
+              {/* Right Side: Title and Description */}
+              <div className={classes.questionContent}>
+                <h2 className={classes.questionTitle}>{question.title}</h2>
+                <p className={classes.questionDescription}>
+                  {question.description}
+                </p>
+              </div>
+            </div>
+            <hr className={classes.separator} />
+          </div>
+        )}
+
+        {/* ========================================
+        Answers Section
+        ========================================
+      */}
         <div className={classes.answersSection}>
-          <h3>Answers From The Community</h3>
+          <h4 className={classes.answersHeader}>
+            Answer From The Community ({answers.length})
+          </h4>
 
-          {question.answers && question.answers.length > 0 ? (
-            question.answers.map((answer) => (
-              <div key={answer.answer_id} className={classes.answerCard}>
-                <p>{answer.content}</p>
-                <small>— {answer.username}</small>
+          {answers.length === 0 ? (
+            <p className={classes.noAnswers}>
+              No answers yet. Be the first to reply!
+            </p>
+          ) : (
+            answers.map((a) => (
+              <div key={a.answerid} className={classes.answerCard}>
+                {/* Answer Profile Group */}
+                <div className={classes.profileGroup}>
+                  <div className={classes.profileIcon}>
+                    <i className="fa fa-user-circle"></i>
+                  </div>
+                  <p className={classes.usernameDisplay}>
+                    {a.username || "Anonymous"}
+                  </p>
+                </div>
+
+                {/* Answer Content */}
+                <div className={classes.answerContent}>
+                  <p>{a.answer}</p>
+                </div>
               </div>
             ))
-          ) : (
-            <p>No answers yet.</p>
           )}
+        </div>
 
-          <form onSubmit={handleSubmit} className={classes.newAnswerForm}>
+        {/* ========================================
+        Add New Answer Form
+        ========================================
+      */}
+        <div className={classes.newAnswerContainer}>
+          <h5 className={classes.newAnswerHeader}>Answer The Question</h5>
+          <form onSubmit={handleSubmit} className={classes.answerForm}>
             <textarea
-              placeholder="Your answer …"
+              className={classes.answerTextarea}
+              rows="5"
               value={newAnswer}
               onChange={(e) => setNewAnswer(e.target.value)}
-              className={classes.newAnswerTextarea}
-            />
-            <button type="submit" className={classes.postAnswerButton}>
-              Post Answer
+              placeholder="Write your answer..."
+            ></textarea>
+            <button className={classes.postAnswerButton} type="submit">
+              Post Your Answer
             </button>
           </form>
         </div>

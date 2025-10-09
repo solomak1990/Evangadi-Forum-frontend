@@ -26,11 +26,10 @@ function Question() {
     }
     try {
       await axios.post(
-        "/questions/askQuestion",
+        "api/question",
         {
           title: titleValue,
           description: descriptionValue,
-          userid: userData?.user?.id,
         },
         {
           headers: {
@@ -39,10 +38,10 @@ function Question() {
         }
       );
       alert("Thank you for your question");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.msg || "Something went wrong!");
+      alert(error.response?.data?.message || "Something went wrong!");
     }
 
   }
