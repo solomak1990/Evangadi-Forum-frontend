@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./component/Dataprovider/DataProvider.jsx";
-import Home from "./pages/Home/Home";
+import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
 import Question from "./pages/Question/Question";

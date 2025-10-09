@@ -1,16 +1,25 @@
 import React from "react";
+import classes from "./answer.module.css";
+
 const profile = "https://via.placeholder.com/48x48.png?text=U";
+
 const Answer = ({ answer, userName }) => {
   return (
-    <div>
-      <hr />
-      <div className="d-md-flex align-items-center justify-space-between">
-        <div className="d-flex flex-md-column">
-          <img className="avatar" src={profile} alt="User Avatar" />
-          <h6 className="align-self-center ms-2 ms-md-0">{userName}</h6>
+    <div className={classes.answerContainer}>
+      <hr className={classes.separator} />
+
+      <div className={classes.answerRow}>
+        {/* Left Section - User Info */}
+        <div className={classes.userSection}>
+          <img className={classes.avatar} src={profile} alt="User Avatar" />
+          <h6 className={classes.username}>{userName || "Anonymous"}</h6>
         </div>
-        <div className="ms-md-5">
-          <h6 className="pt-2 pt-md-0">{answer}</h6>
+
+        {/* Right Section - Answer Text */}
+        <div className={classes.textSection}>
+          <h6 className={classes.answerText}>
+            {answer || "No answer provided."}
+          </h6>
         </div>
       </div>
     </div>
