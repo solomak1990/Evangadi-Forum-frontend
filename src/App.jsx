@@ -8,19 +8,17 @@ import Question from "./Pages/Question/Question.jsx"
 import Register from "./Pages/Register/Register.jsx"
 import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound";
-import QuestionList from "./Pages/QuestionList/QuestionList"
+import QuestionList from "./Pages/Questionlist/QuestionList";
 
-// import Profile from "./component/Header/Profile";
-// import NotFound from "./pages/login/Notfound";
 export const AppState = createContext();
 function App() {
   const [userData, setUserData] = useContext(UserContext);
   let token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  const checkUser = async () => {
+  const checkUser2 = async () => {
     try {
-      const { data } = await axios.get("api/users/checkUser", {
+      const { data } = await axios.get("api/user/checkUser", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -55,7 +53,7 @@ function App() {
         <Route path="/question" element={<Question />} />
         <Route path="/question/:id" element={<Answer />} />
         <Route path="/allquestion" element={<QuestionList />} />
-                <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AppState.Provider>
   );

@@ -24,11 +24,11 @@ function login() {
     }
 
     try {
-      const { data } = await axios.post("api/users/login", {
+      const { data } = await axios.post("api/user/login", {
         email: emailValue,
         password: passValue,
       });
-      console.log(data);
+      // console.log(data);
 
       // alert("login successfull.");
       localStorage.setItem("token", data.token);

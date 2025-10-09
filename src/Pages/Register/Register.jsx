@@ -32,7 +32,7 @@ function Register() {
     }
 
     try {
-      await axios.post("api/users/register", {
+      await axios.post("api/user/register", {
         username: usernameValue,
         firstname: firstValue,
         lastname: lastValue,
@@ -43,7 +43,7 @@ function Register() {
       navigate("/login");
     } catch (error) {
       alert("something went wrong!");
-      console.log(error.response);
+      // console.log(error.response);
     }
   }
 
