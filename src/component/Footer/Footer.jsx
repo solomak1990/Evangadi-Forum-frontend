@@ -1,5 +1,5 @@
 import styles from "./footer.module.css";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+// import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons";
 
 
 const Footer = () => {
@@ -19,7 +19,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={styles.icon}
           >
-            <FaFacebookF />
+            {/* <FaFacebookF /> */}
           </a>
           <a
             href="https://www.instagram.com/evangaditech/#"
@@ -27,7 +27,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={styles.icon}
           >
-            <FaInstagram />
+            {/* <FaInstagram /> */}
           </a>
           <a
             href="https://www.youtube.com/@EvangadiTech"
@@ -35,7 +35,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={styles.icon}
           >
-            <FaYoutube />
+            {/* <FaYoutube /> */}
           </a>
         </div>
       </div>
