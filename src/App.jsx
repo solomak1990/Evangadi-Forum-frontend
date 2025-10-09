@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { UserContext } from "./component/Dataprovide/DataProvider";
+// import { UserContext } from "./component/Dataprovide/DataProvider";
 import Home from "./pages/Home/Home";
 import Login from "./pages/login/login";
 import axios from "./axiosConfig";
 import Question from "./pages/Question/Question";
-import Register from "./pages/Register/Register";
+import Register from "./Pages/Register/Register";
 import Answer from "./pages/Answer/Answer";
 import axiosBase from "./axiosConfig";
 import Profile from "./component/Header/Profile";

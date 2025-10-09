@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./register.module.css";
 
 function Register() {
-  
   const userNameDom = useRef();
   const firstnameDom = useRef();
   const lastnameDom = useRef();
@@ -37,10 +36,9 @@ function Register() {
         email: emailValue,
         password: passValue,
       });
-      
+
       alert("Registration successful. Please log in.");
     } catch (error) {
-      
       const message = error.response?.data?.message || "Something went wrong!";
       alert(message);
       console.error(error);

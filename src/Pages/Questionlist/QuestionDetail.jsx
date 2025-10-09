@@ -1,4 +1,4 @@
-// src/pages/QuestionDetail.jsx
+src/pages/QuestionDetail.jsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosBase from "../../axiosconfig"; // adjust the path if needed
