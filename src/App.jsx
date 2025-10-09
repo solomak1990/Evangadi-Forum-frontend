@@ -11,6 +11,7 @@ import Answer from "./Pages/Answer/Answer.jsx";
  import axiosBase from "./axiosConfig";
 import Profile from "./component/Header/Profile";
 import NotFound from "./Pages/Login/Notfound";
+import QuestionList from "./Pages/QuestionList/QuestionList"
 
 // import Profile from "./component/Header/Profile";
 // import NotFound from "./pages/login/Notfound";
@@ -41,18 +42,17 @@ function App() {
     checkUser2();
   }, []);
   return (
-  
-
     <AppState.Provider value={{ user, setUser }}>
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/question" element={<Question />} />
-      <Route path="/question/:id" element={<Answer />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/question" element={<Question />} />
+        <Route path="/question/:id" element={<Answer />} />
+        <Route path="/allquestion" element={<QuestionList />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </AppState.Provider>
   );
 }
