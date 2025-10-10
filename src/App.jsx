@@ -8,7 +8,7 @@ import Question from "./Pages/Question/Question.jsx";
 import Register from "./Pages/Register/Register.jsx";
 import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound";
-import QuestionList from "./Pages/QuestionList/QuestionList";
+import QuestionList from "./Pages/Questionlist/QuestionList";
 import { getToken } from "./utils/tokenHelper"; // Import the helper
 
 export const AppState = createContext();
