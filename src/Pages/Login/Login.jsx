@@ -3,14 +3,13 @@ import styles from './login.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../axiosConfig';
 import Layout from '../../component/Layout/Layout'; 
+import { setToken } from "../../utils/tokenHelper";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMsg, setErrorMsg] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -19,13 +18,14 @@ const Login = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+    setIsLoading(true);
 
     if (!formData.email || !formData.password) {
       setErrorMsg('Please fill in all fields');
+      setIsLoading(false);
       return;
     }
 
@@ -33,14 +33,20 @@ const Login = () => {
       const response = await axios.post('api/user/login', formData);
 
       if (response.data.message === 'User login successful') {
-        localStorage.setItem('token', response.data.token);
-        navigate('/home'); 
+        // Use the token helper to set token consistently
+        setToken(response.data.token);
+        console.log('Login successful, token stored');
         
+        // Navigate to home after successful login
+        navigate('/home'); 
       } else {
         setErrorMsg(response.data.message || 'Login failed');
       }
     } catch (error) {
+      console.error('Login error:', error);
       setErrorMsg(error.response?.data?.message || 'Invalid credentials or server error');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,6 +70,8 @@ const Login = () => {
                   placeholder="Email address"
                   value={formData.email}
                   onChange={handleChange}
+                  disabled={isLoading}
+                  autoComplete="email"
                 />
 
                 <input
@@ -72,6 +80,8 @@ const Login = () => {
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
+                  disabled={isLoading}
+                  autoComplete="current-password"
                 />
 
                 <div className={styles.loginFooter}>
@@ -80,8 +90,12 @@ const Login = () => {
 
                 {errorMsg && <p className={styles.error}>{errorMsg}</p>}
 
-                <button type="submit" className={styles.loginButton}>
-                  Login
+                <button 
+                  type="submit" 
+                  className={styles.loginButton}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Logging in...' : 'Login'}
                 </button>
               </form>
             </div>
@@ -92,7 +106,7 @@ const Login = () => {
               <h4 className={styles.aboutTitle}>About</h4>
               <h2 className={styles.aboutHeading}>Evangadi Networks</h2>
               <p className={styles.aboutText}>
-                No matter what stage of life you are in, whether you’re just starting elementary school or
+                No matter what stage of life you are in, whether you're just starting elementary school or
                 being promoted to CEO of a Fortune 500 company, you have much to offer to those who are
                 trying to follow in your footsteps.
               </p>
