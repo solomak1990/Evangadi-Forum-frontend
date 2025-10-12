@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import axiosBase from "../../axiosConfig";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
 import styles from "./register.module.css";
-import { setToken } from "../../utils/tokenHelper"; // Import the token helper
 
 function Register() {
   const navigate = useNavigate();
