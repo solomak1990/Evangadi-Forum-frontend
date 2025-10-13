@@ -1,0 +1,46 @@
+/* *{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    border: 0.25px solid #ccc;
+    background-color: #3B455A;
+    padding: 50px;
+}
+.content img{
+   height:4vh;
+   padding: 5px;
+   
+   
+}
+.content{
+    display:inline ;
+    margin-right: 0;
+     gap: 80px;
+     
+}
+.content P{
+    font-size: 22px;
+    padding: 15px;
+    color: white;
+   
+}
+
+.content li{
+    list-style: none;
+    color:hsla(0, 32%, 92%, 0.288);
+        padding: 5px;
+        font-family: 18;
+  
+}
+.media ul{
+    padding-top: 20px;
+      display: flex;
+    gap: 30px;
+}
+.media li{
+     width:30%;
+     
+} */
