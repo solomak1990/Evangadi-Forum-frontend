@@ -21,9 +21,7 @@ const Navbar = () => {
       setIsLoggedIn(false);
       navigate("/login");
     } else {
-      localStorage.setItem("token", "res.data.username");
-      setIsLoggedIn(true);
-      navigate("/");
+      navigate("/login");
     }
   };
 
@@ -42,9 +40,9 @@ const Navbar = () => {
       </div>
 
       <div className={`${classes.links} ${menuOpen ? classes.show : ""}`}>
-        <a href="/" className={classes.link}>
+        <Link to="/" className={classes.link}>
           Home
-        </a>
+        </Link>
         <Link to="/how-it-works" className={classes.link}>
           How it works
         </Link>

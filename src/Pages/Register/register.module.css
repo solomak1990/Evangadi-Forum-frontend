@@ -2,8 +2,6 @@
 .registerSection {
   display: flex;
   align-items: center;
-  justify-content: center;
-  align-items: center;
   padding: 40px 20px;
   background-color: #f8f9fa;
   min-height: 100vh;
@@ -11,15 +9,15 @@
 
 .registerContainer {
   background-color: #ffffff;
-  padding: 40px;
+  padding: 32px;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 450px;
+  max-width: 520px;
 }
 
 .registerTitle {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 10px;
   color: #333;
@@ -42,7 +40,7 @@
 .registerForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .formGroup {
@@ -58,7 +56,7 @@
 }
 
 .input {
-  padding: 12px 15px;
+  padding: 14px 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
@@ -73,8 +71,8 @@
 }
 
 .registerButton {
-  padding: 12px;
-  background-color: #ff7f2a;
+  padding: 14px;
+  background-color: #4c6ef5;
   color: white;
   font-weight: bold;
   border: none;
@@ -86,5 +84,46 @@
 }
 
 .registerButton:hover {
-  background-color: #e66b1e;
+  background-color: #ff8a00;
 }
+
+.rowGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.consentRow {
+  font-size: 12px;
+  color: #666;
+}
+
+.consentRow a { color: #4c6ef5; text-decoration: none; }
+.consentRow a:hover { text-decoration: underline; }
+
+.bottomLink {
+  text-align: center;
+  color: #ff8a00;
+  margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .rowGroup { grid-template-columns: 1fr; }
+  .registerContainer { padding: 24px; }
+}
+

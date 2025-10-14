@@ -1,106 +1,247 @@
-/* SingleQuestion.module.css */
-
-.singleQuestionContainer {
-  max-width: 800px;
-  margin: 40px auto;
+/* QuestionList Styles */
+/* .container {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.questionListTitle {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: linear-gradient(135deg, #ff7f2a, #ff9800);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(255, 127, 42, 0.3);
 }
 
 .questionCard {
-  margin-bottom: 40px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  border-left: 5px solid #4a90e2;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  padding: 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid #ff7f2a;
+}
+
+.questionCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .questionTitle {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 12px;
-  color: #333333;
+  color: #333;
+  line-height: 1.4;
+}
+
+.questionLink {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.questionLink:hover {
+  color: #ff7f2a;
 }
 
 .questionDescription {
   font-size: 16px;
   line-height: 1.6;
-  color: #555555;
-  margin-bottom: 16px;
-}
-
-
-.emptyMessage {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #555;
-  background-color: #f9f9f9;
-  padding: 20px;
-  margin: 30px auto;
-  border-radius: 8px;
-  max-width: 600px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #666;
+  margin-bottom: 15px;
 }
 
 .questionMeta {
   font-size: 14px;
-  color: #888888;
-}
-
-.answersSection {
-  margin-top: 30px;
-}
-
-.answerCard {
-  background-color: #f0f4f8;
-  padding: 15px 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border-left: 4px solid #4caf50;
-}
-
-.answerCard p {
-  margin: 0 0 8px 0;
-  font-size: 15px;
-  color: #333333;
-}
-
-.answerCard small {
-  font-size: 13px;
-  color: #666666;
-}
-
-.newAnswerForm {
-  margin-top: 20px;
+  color: #888;
   display: flex;
-  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
-.newAnswerTextarea {
-  min-height: 80px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #cccccc;
-  font-size: 14px;
-  margin-bottom: 10px;
-  resize: vertical;
+.emptyMessage {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+  background: #f8f9fa;
+  padding: 40px;
+  margin: 40px auto;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+} */
+
+/* Responsive Design */
+/* @media (max-width: 768px) {
+  .questionListTitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .questionCard {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .questionTitle {
+    font-size: 18px;
+  }
+} */
+
+
+/* QuestionList Styles */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
-.postAnswerButton {
-  width: 150px;
-  padding: 10px 15px;
-  font-size: 14px;
-  background-color: #4a90e2;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.questionListTitle {
+  /* Hiding the header to match the image's structure where no general header is shown */
+  display: none; 
 }
 
-    .postAnswerButton:hover {
-  background-color: #357ab8;
+/* ------------------------------------------------ */
+/* --- NEW/MODIFIED STYLES FOR QUESTION ITEM ROW --- */
+/* ------------------------------------------------ */
+
+.questionCard {
+  /* Re-purposing questionCard for the full row item */
+  background: white;
+  border-radius: 0; /* Remove rounded corners for a clean row look */
+  box-shadow: none; /* Remove box shadow */
+  border-left: none; /* Remove left border */
+  border-bottom: 1px solid #eee; /* Use a bottom border as separator */
+  margin-bottom: 0; /* No margin between items, border handles spacing */
+  padding: 15px 0; /* Padding for the row */
+  transition: background-color 0.2s ease;
+  
+  /* Flexbox for the row content (Profile | Title | Arrow) */
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Indicate clickability */
+}
+
+.questionCard:hover {
+  transform: none; /* No vertical movement on hover */
+  box-shadow: none; /* No shadow change on hover */
+  background-color: #f9f9f9; /* Subtle background change on hover */
+}
+
+/* 1. Profile Group (Left side) */
+.profileGroup {
+    display: flex;
+    flex-direction: column; /* Stack icon and name vertically */
+    align-items: center;
+    width: 100px; /* Fixed width for alignment */
+    min-width: 100px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.profileIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e6f0ff;
+    color: #2a56c6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.usernameDisplay {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 5px;
+    /* This class needs to be applied to the user_name element */
+}
+
+/* 2. Question Content (Center) */
+.questionContent {
+    flex-grow: 1; /* Takes up all available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.questionTitle {
+  /* Use this class for the actual question text */
+  font-size: 1.1rem; /* Smaller, modern font size */
+  font-weight: 500;
+  margin: 0;
+  color: #007bff; /* Blue link color */
+  line-height: 1.4;
+}
+
+.questionLink {
+  /* This link style is now applied to the question title itself */
+  color: inherit;
+  text-decoration: none;
+}
+
+.questionLink:hover {
+  color: #0056b3;
+}
+
+/* Hide Description and Meta data as they are not shown in the image list view */
+.questionDescription,
+.questionMeta {
+  display: none; 
+}
+
+/* 3. Navigation Arrow (Right side) */
+.arrowIcon {
+    font-size: 1.5rem;
+    color: #555;
+    margin-left: 20px;
+}
+
+/* ------------------------------------------------ */
+
+.emptyMessage {
+  /* Keep original styling for empty message */
+text-align: center;
+font-size: 18px;
+color: #666;
+background: #f8f9fa;
+padding: 40px;
+margin: 40px auto;
+border-radius: 10px;
+max-width: 600px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.questionListTitle {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+  
+.questionCard {
+  padding: 15px 10px;
+  margin-bottom: 0;
+}
+  
+  .profileGroup {
+      width: 80px;
+      min-width: 80px;
+      margin-right: 10px;
+  }
+
+  .profileIcon {
+      font-size: 2rem;
+  }
 }

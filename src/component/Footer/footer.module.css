@@ -18,9 +18,10 @@
 }
 
 .logoImg {
-  width: 100px;
+  width: 140px;
   height: auto;
   margin-bottom: 25px;
+  filter: contrast(115%) saturate(110%);
 }
 
 
