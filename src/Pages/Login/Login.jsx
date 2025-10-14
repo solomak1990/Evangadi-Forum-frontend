@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../axiosConfig';
 import { UserContext } from '../../component/Dataprovider/DataProvider';
 import Layout from '../../component/Layout/Layout'; 
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <Layout> 
+    <Layout>
       <div className={styles.pageWrapper}>
         <div className={styles.loginPageContainer}>
           <div className={styles.blueShape}></div>
@@ -58,7 +60,8 @@ const Login = () => {
             <div className={styles.loginBox}>
               <h2 className={styles.loginHeading}>Login to your account</h2>
               <p>
-                Don't have an account? <Link to="/register">Create a new account</Link>
+                Don't have an account?{" "}
+                <Link to="/register">Create a new account</Link>
               </p>
 
               <form onSubmit={handleSubmit}>
@@ -71,17 +74,29 @@ const Login = () => {
                 />
 
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
                 />
-                <div style={{ marginTop: '6px' }}>
-                  <label style={{ fontSize: '12px' }}>
-                    <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> Show password
+
+                {/* <div style={{ marginTop: "6px" }}>
+                  <label style={{ fontSize: "12px" }}>
+                    <input
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={() => setShowPassword(!showPassword)}
+                    />{" "}
+                    Show password
                   </label>
-                </div>
+                </div> */}
+                <span
+                  className={classes.eye_icon}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                </span>
 
                 <div className={styles.loginFooter}>
                   <Link to="/forgot-password">Forgot password?</Link>
@@ -101,13 +116,15 @@ const Login = () => {
               <h4 className={styles.aboutTitle}>About</h4>
               <h2 className={styles.aboutHeading}>Evangadi Networks</h2>
               <p className={styles.aboutText}>
-                No matter what stage of life you are in, whether you’re just starting elementary school or
-                being promoted to CEO of a Fortune 500 company, you have much to offer to those who are
-                trying to follow in your footsteps.
+                No matter what stage of life you are in, whether you’re just
+                starting elementary school or being promoted to CEO of a Fortune
+                500 company, you have much to offer to those who are trying to
+                follow in your footsteps.
               </p>
               <p className={styles.aboutText}>
-                Whether you are willing to share your knowledge or you are just looking to meet mentors of
-                your own, please start by joining the network here.
+                Whether you are willing to share your knowledge or you are just
+                looking to meet mentors of your own, please start by joining the
+                network here.
               </p>
               <button className={styles.aboutButton}>HOW IT WORKS</button>
             </div>
