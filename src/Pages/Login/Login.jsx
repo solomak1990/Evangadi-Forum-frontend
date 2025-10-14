@@ -1,21 +1,18 @@
-import React, { useContext, useState } from 'react';
-import styles from './login.module.css';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from '../../axiosConfig';
-import { UserContext } from '../../component/Dataprovider/DataProvider';
-import Layout from '../../component/Layout/Layout'; 
+import React, { useContext, useState } from "react";
+import styles from "./login.module.css";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "../../axiosConfig";
+import { UserContext } from "../../component/Dataprovider/DataProvider";
+import Layout from "../../component/Layout/Layout";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
 
 const Login = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useContext(UserContext);
 
-  
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -24,29 +21,29 @@ const Login = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg('');
+    setErrorMsg("");
 
     if (!formData.email || !formData.password) {
-      setErrorMsg('Please fill in all fields');
+      setErrorMsg("Please fill in all fields");
       return;
     }
 
     try {
-      const response = await axios.post('api/user/login', formData);
+      const response = await axios.post("api/user/login", formData);
 
-      if (response.data.message === 'User login successful') {
-        localStorage.setItem('token', response.data.token);
+      if (response.data.message === "User login successful") {
+        localStorage.setItem("token", response.data.token);
         setUserData({ ...(userData || {}), token: response.data.token });
-        navigate('/home'); 
-        
+        navigate("/home");
       } else {
-        setErrorMsg(response.data.message || 'Login failed');
+        setErrorMsg(response.data.message || "Login failed");
       }
     } catch (error) {
-      setErrorMsg(error.response?.data?.message || 'Invalid credentials or server error');
+      setErrorMsg(
+        error.response?.data?.message || "Invalid credentials or server error"
+      );
     }
   };
 
@@ -72,31 +69,31 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-
-                {/* <div style={{ marginTop: "6px" }}>
-                  <label style={{ fontSize: "12px" }}>
-                    <input
-                      type="checkbox"
-                      checked={showPassword}
-                      onChange={() => setShowPassword(!showPassword)}
-                    />{" "}
-                    Show password
+                <div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  {/* <div style={{ marginTop: '6px' }}>
+                  <label style={{ fontSize: '12px' }}>
+                    <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> Show password
                   </label>
                 </div> */}
-                <span
-                  className={classes.eye_icon}
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                </span>
+                  <span
+                    className={styles.eye_icon}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible />
+                    ) : (
+                      <AiOutlineEye />
+                    )}
+                             
+                  </span>
+                </div>
 
                 <div className={styles.loginFooter}>
                   <Link to="/forgot-password">Forgot password?</Link>

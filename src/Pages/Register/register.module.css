@@ -96,12 +96,14 @@ Register Page Styles
 
 .passwordWrapper {
   position: relative;
+  width: 100%;
 }
 
 .eyeButton {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 0%;
+  bottom: 0%;
   transform: translateY(-50%);
   background: none;
   border: none;

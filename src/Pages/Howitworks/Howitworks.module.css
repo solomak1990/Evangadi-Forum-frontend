@@ -1,0 +1,86 @@
+* {
+
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.container {
+  background-image: url("../../image/How.png");
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: auto;
+}
+
+/* Container for the entire landing page */
+.Title {
+  text-align: center; /* Center align the title */
+  margin: 100px 0 60px; /* Add margin for spacing */
+}
+
+.Title h1 {
+  font-size: 3rem; /* Increased font size for emphasis */
+  color: #3b455a; /* Dark shade for the title */
+  font-weight: bold; /* Bold title */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Subtitle and content styles */
+.SubTitle {
+  max-width: 900px; /* Increase maximum width for better layout */
+  margin: 0 auto; /* Center the content */
+  padding: 30px; /* Increased padding for spaciousness */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* Slightly less transparency for readability */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+}
+
+/* Heading styles */
+.SubTitle h2 {
+  font-size: 2rem; /* Increased font size for subheadings */
+  color: #802119; /* Color for subheadings */
+  margin-top: 20px; /* Space above each subheading */
+  margin-bottom: 10px; /* Space below each subheading */
+}
+
+/* Paragraph styles */
+.SubTitle p {
+  font-size: 1.1rem; /* Slightly larger font size for paragraphs */
+  line-height: 1.7; /* Improved line spacing for readability */
+  color: #333; /* Dark gray color for text */
+  margin-bottom: 20px; /* Space below paragraphs */
+}
+
+/* List styles */
+.SubTitle ul {
+  margin-left: 20px; /* Indent the list */
+}
+
+.SubTitle li {
+  margin-bottom: 15px; /* Space between list items */
+  color: #333; /* Dark gray color for list items */
+  font-size: 1.1rem; /* Font size for list items */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .Title h1 {
+    font-size: 2.5rem; /* Adjust font size for smaller screens */
+  }
+
+  .SubTitle h2 {
+    font-size: 1.7rem; /* Smaller font size for subheadings */
+  }
+
+  .SubTitle p {
+    font-size: 1rem; /* Smaller font size for paragraphs */
+  }
+
+  .SubTitle li {
+    font-size: 1rem; /* Adjust font size for list items */
+  }
+}
