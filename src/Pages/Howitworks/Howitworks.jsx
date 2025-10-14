@@ -1,6 +1,6 @@
 import React from 'react'
 import  Classes from "../Howitworks/Howitworks.module.css";
-import Header from '../Header/Header';
+import Header from '../../component/Header/Header';
 function Howitworks() {
   return (
     <div>

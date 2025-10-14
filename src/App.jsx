@@ -11,6 +11,7 @@ import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound.jsx";
 import QuestionList from "./Pages/Questionlist/QuestionList.jsx"
 import { getToken } from "./utils/tokenHelper.js";
+import Howitworkrks from "./Pages/Howitworks/Howitworks.jsx"
 
 export const AppState = createContext();
 
@@ -62,6 +63,8 @@ function App() {
         <Route path="/question/:id" element={<QuestionDetail />} />
         <Route path="/answer/:id" element={<Answer />} />
         <Route path="/allquestion" element={<QuestionList />} />
+         <Route path="/howitworks" element={<Howitworkrks/>} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppState.Provider>

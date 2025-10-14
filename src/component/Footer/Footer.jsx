@@ -30,9 +30,10 @@ function Footer() {
               <div>
                 <h3>Useful Link</h3>
                 <ul>
-                  <li>How it works</li>
-                  <li>Terms of Service</li>
-                  <li>Privacy policy</li>
+                  
+                  <li><a href="">How it works</a></li>
+                  <li><a href="">Terms of Service</a></li>
+                  <li><a href="">Privacy policy</a></li>
                 </ul>
               </div>
               <div>
@@ -47,7 +48,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className={classes.copy_write}>&copy; 2010-2025, Evangadi.com</div>
+        <div className={classes.copy_write}></div>
       </div>
     </>
   );
