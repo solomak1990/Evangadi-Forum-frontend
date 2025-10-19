@@ -96,7 +96,9 @@ const Login = () => {
                 </div>
 
                 <div className={styles.loginFooter}>
-                  <Link to="/forgot-password">Forgot password?</Link>
+                  <Link to="/forgot-password" className={styles.forgetLink}>
+                    Forgot password?          
+                  </Link>
                 </div>
 
                 {errorMsg && <p className={styles.error}>{errorMsg}</p>}
@@ -123,9 +125,10 @@ const Login = () => {
                 looking to meet mentors of your own, please start by joining the
                 network here.
               </p>
-              <button className={styles.aboutButton}>HOW IT WORKS</button>
+              <Link to="/how-it-works">
+                <button className={styles.aboutButton}>HOW IT WORKS</button>
+                </Link>
             </div>
-            <div className={styles.pinkShape}></div>
           </div>
         </div>
       </div>
