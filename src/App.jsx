@@ -6,10 +6,13 @@ import Login from "./Pages/Login/Login.jsx";
 import axios from "./axiosConfig";
 import Question from "./Pages/Question/Question.jsx";
 import Register from "./Pages/Register/Register.jsx";
+import QuestionDetail from "./Pages/Questionlist/QuestionDetail.jsx";
 import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound.jsx";
 import QuestionList from "./Pages/Questionlist/QuestionList.jsx"
 import { getToken } from "./utils/tokenHelper.js";
+import HowItWorks from "./Pages/HowItWorks/HowItWorks.jsx"
+import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword.jsx";
 
 export const AppState = createContext();
 
@@ -28,7 +31,7 @@ function App() {
 
       const { data } = await axios.get("api/user/checkUser");
       // No need for headers - axiosConfig handles it automatically
-      
+
       setUserData({ user: data, token: token });
       setUser(data);
       console.log("User data:", data);
@@ -58,8 +61,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/question" element={<Question />} />
-        <Route path="/question/:id" element={<Answer />} />
+        <Route path="/question/:id" element={<QuestionDetail />} />
+        <Route path="/answer/:id" element={<Answer />} />
         <Route path="/allquestion" element={<QuestionList />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppState.Provider>
