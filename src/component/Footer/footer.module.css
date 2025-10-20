@@ -4,6 +4,10 @@
   color: white;
   /* font-family: "Courier New", Courier, monospace; */
   font-size: 12px;
+   position: sticky;
+  bottom: 0;
+  z-index: 100;
+  
 }
 
 .footer_out_container {
@@ -11,9 +15,11 @@
   justify-content: center;
   padding: 20px;
   height: 100px;
+  
 }
 .footer_inner_container {
   width: 70%;
+  
 }
 
 .footer_data {
