@@ -77,11 +77,6 @@ const Login = () => {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  {/* <div style={{ marginTop: '6px' }}>
-                  <label style={{ fontSize: '12px' }}>
-                    <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> Show password
-                  </label>
-                </div> */}
                   <span
                     className={styles.eye_icon}
                     onClick={() => setShowPassword(!showPassword)}
@@ -127,7 +122,7 @@ const Login = () => {
               </p>
               <Link to="/how-it-works">
                 <button className={styles.aboutButton}>HOW IT WORKS</button>
-                </Link>
+              </Link>
             </div>
           </div>
         </div>

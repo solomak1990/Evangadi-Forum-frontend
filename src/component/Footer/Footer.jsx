@@ -4,6 +4,7 @@ import logo from "../images/logo.png";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -30,10 +31,20 @@ function Footer() {
               <div>
                 <h3>Useful Link</h3>
                 <ul>
-                  
-                  <li><a href="">How it works</a></li>
-                  <li><a href="">Terms of Service</a></li>
-                  <li><a href="">Privacy policy</a></li>
+                  <li>
+                    <Link to="/how-it-works">How it works</Link>
+                  </li>
+
+                  <li>
+                    <a href="https://evangadiforum.com/Terms/">
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://evangadiforum.com/PrivacyPolicy">
+                      Privacy policy
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div>
