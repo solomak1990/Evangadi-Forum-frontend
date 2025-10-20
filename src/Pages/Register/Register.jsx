@@ -43,7 +43,7 @@ function Register() {
       navigate("/login");
     } catch (error) {
       alert("something went wrong!");
-      console.log(error.response);
+      // console.log(error.response);
     }
   }
 
