@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./footer.module.css"
+import classes from "./footer.module.css";
 import logo from "../images/logo.png";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -34,17 +34,13 @@ function Footer() {
                   <li>
                     <Link to="/how-it-works">How it works</Link>
                   </li>
-
                   <li>
-                    <a href="https://evangadiforum.com/Terms/">
-                      Terms of Service
-                    </a>
+                    <Link to="/terms-and-conditions">Terms of Service</Link>
                   </li>
                   <li>
-                    <a href="https://evangadiforum.com/PrivacyPolicy">
-                      Privacy policy
-                    </a>
+                    <Link to="/PrivacyPolicy">Privacy policy</Link>
                   </li>
+                  
                 </ul>
               </div>
               <div>

@@ -1,13 +1,9 @@
 .footer {
   background-color: #3b455a;
-   /* background: #2C313C; */
   color: white;
   /* font-family: "Courier New", Courier, monospace; */
   font-size: 12px;
-   /* position: sticky;
-  bottom: 0;
-  z-index: 100; */
-  
+    
 }
 
 .footer_out_container {
