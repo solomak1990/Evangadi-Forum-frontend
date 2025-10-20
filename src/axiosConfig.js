@@ -5,8 +5,7 @@ import { getToken, removeToken } from "./utils/tokenHelper";
 const axiosBase = axios.create({
   // baseURL:"http://localhost:2025",
   baseURL:"https://forumevangadibackend.natesirak.com",
-  // baseURL:"https://evangadiforumfend.natesirak.com"
-});
+ });
 
 // Add token to all requests automatically
 axiosBase.interceptors.request.use(
