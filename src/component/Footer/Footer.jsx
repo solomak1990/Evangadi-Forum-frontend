@@ -41,7 +41,7 @@ function Footer() {
                 <ul>
                   <li>Contact Info</li>
                   <li>support@evangadi.com</li>
-                  <li>‪+1-202-386-2702‬</li>
+                  <li>+1-202-386-2702</li>
                 </ul>
               </div>
             </div>
