@@ -26,6 +26,13 @@
   flex: 1;
   padding: 20px;
   position: relative;
+
+}
+.loginRight h2{
+  background: linear-gradient(to right, #fd5310, #000); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 /* For the Login Section */
@@ -153,3 +160,7 @@
 .aboutButton:hover {
   background-color: #e66b1e;
 }
+
+
+
+ 

@@ -1,3 +1,4 @@
+
 .login_conteiner {
   display: flex;
   align-items: center;
@@ -72,6 +73,7 @@
   border: 1px solid #999999;
   border-radius: 3px;
   margin-bottom: -10px;
+
 }
 
 .login_form_input button {
@@ -81,7 +83,7 @@
   border-radius: 3px;
   background-color: #fe8402;
   color: white;
-  margin: 20px 0px 15px;
+  margin: 20px 0px 30px;
   font-size: 14px;
 }
 
@@ -89,6 +91,12 @@
   cursor: pointer;
   background-color: #516cf0;
   cursor: pointer;
+}
+.Evangadi_description h2{
+  background: linear-gradient(to right, #fd5310, #000); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 .login__form a {
@@ -168,6 +176,10 @@
   text-align: center;
   color: #da7000;
   align-items: center;
+  font-size: 12px;
+}
+.account p{
+margin-top: -25px;
 }
 .agree a {
   text-decoration: none;
@@ -208,7 +220,7 @@
 .eye_icon {
   position: absolute;
   right: 715px;
-  top: 355px;
+  top: 338px;
   cursor: pointer;
   font-size: 20px;
   color: gray;
