@@ -225,3 +225,29 @@ margin-top: -25px;
   font-size: 20px;
   color: gray;
 }
+
+.error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #188038;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.inputError {
+  border: 2px solid #d93025 !important;
+}
+
+.showPasswordBtn {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  color: #516cf0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
