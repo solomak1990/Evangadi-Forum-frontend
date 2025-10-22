@@ -198,23 +198,27 @@ import axios from "../../axiosConfig";
 import classes from "../../Pages/Answer/answer.module.css";
 
 const QuestionDetail = () => {
-  const { id } = useParams(); // question ID
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [newAnswer, setNewAnswer] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState("");
   const [editedDescription, setEditedDescription] = useState("");
 
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  const token = localStorage.getItem("auth-token");
+
   // Fetch question details
   const fetchQuestion = async () => {
     try {
-      const token = localStorage.getItem("auth-token");
       const res = await axios.get(`api/question/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
@@ -230,7 +234,6 @@ const QuestionDetail = () => {
   // Fetch answers
   const fetchAnswers = async () => {
     try {
-      const token = localStorage.getItem("auth-token");
       const res = await axios.get(`api/answer/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
@@ -251,63 +254,88 @@ const QuestionDetail = () => {
   // Submit new answer
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newAnswer.trim()) return;
+    if (!newAnswer.trim()) {
+      setError("Please enter your answer.");
+      setSuccess("");
+      return;
+    }
 
     try {
-      const token = localStorage.getItem("auth-token");
       await axios.post(
         "api/answer",
         { questionid: id, answer: newAnswer },
         { headers: { Authorization: "Bearer " + token } }
       );
       setNewAnswer("");
+      setError("");
+      setSuccess("Answer submitted successfully!");
       fetchAnswers();
+      setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
       console.error("Error submitting answer:", err);
       setError("Failed to submit answer");
+      setSuccess("");
     }
   };
 
   // Edit question
   const handleEditSubmit = async (e) => {
     e.preventDefault();
+    if (!editedTitle.trim() || !editedDescription.trim()) {
+      setError("Title and description cannot be empty.");
+      setSuccess("");
+      return;
+    }
     try {
-      const token = localStorage.getItem("auth-token");
       await axios.put(
         `api/question/${id}`,
         { title: editedTitle, description: editedDescription },
         { headers: { Authorization: "Bearer " + token } }
       );
       setIsEditing(false);
+      setError("");
+      setSuccess("Question updated successfully!");
       fetchQuestion();
+      setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
       console.error("Error updating question:", err);
       setError("Failed to update question");
+      setSuccess("");
     }
   };
 
-  // Delete question
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this question?")) return;
+  // Delete question handlers
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true);
+  };
 
+  const handleConfirmDelete = async () => {
     try {
-      const token = localStorage.getItem("auth-token");
       await axios.delete(`api/question/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
-      alert("Question deleted successfully!");
-      navigate("/home");
+      setError("");
+      setSuccess("Question deleted successfully!");
+      setShowDeleteConfirm(false);
+      setTimeout(() => navigate("/home"), 2000);
     } catch (err) {
       console.error("Error deleting question:", err);
       setError("Failed to delete question");
+      setShowDeleteConfirm(false);
     }
   };
 
+  const handleCancelDelete = () => {
+    setShowDeleteConfirm(false);
+  };
+
   if (loading) return <div className="text-center py-4">Loading...</div>;
-  if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
     <div className="container py-4">
+      {error && <p className={classes.error}>{error}</p>}
+      {success && <p className={classes.success}>{success}</p>}
+
       {question && (
         <>
           {/* Question Display */}
@@ -325,10 +353,28 @@ const QuestionDetail = () => {
                 </button>
                 <button
                   className="btn btn-outline-danger rounded px-4"
-                  onClick={handleDelete}
+                  onClick={handleDeleteClick}
                 >
                   Delete Question
                 </button>
+
+                {showDeleteConfirm && (
+                  <div className="mt-2">
+                    <span>Are you sure?</span>
+                    <button
+                      className="btn btn-danger ms-2 px-3"
+                      onClick={handleConfirmDelete}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="btn btn-secondary ms-2 px-3"
+                      onClick={handleCancelDelete}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
               </div>
               <hr />
             </>
@@ -337,13 +383,13 @@ const QuestionDetail = () => {
               <h4>Edit Question</h4>
               <input
                 type="text"
-                className="form-control mb-2"
+                className={`form-control mb-2 ${error ? classes.inputError : ""}`}
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
                 placeholder="Title"
               />
               <textarea
-                className="form-control mb-2"
+                className={`form-control mb-2 ${error ? classes.inputError : ""}`}
                 rows="4"
                 value={editedDescription}
                 onChange={(e) => setEditedDescription(e.target.value)}
@@ -363,7 +409,7 @@ const QuestionDetail = () => {
                 <button
                   className="btn btn-outline-danger rounded px-4 ms-2"
                   type="button"
-                  onClick={handleDelete}
+                  onClick={handleDeleteClick}
                 >
                   Delete Question
                 </button>
@@ -401,7 +447,7 @@ const QuestionDetail = () => {
         <h5>Your Answer</h5>
         <form onSubmit={handleSubmit}>
           <textarea
-            className="form-control mb-3"
+            className={`form-control mb-3 ${error ? classes.inputError : ""}`}
             rows="4"
             value={newAnswer}
             onChange={(e) => setNewAnswer(e.target.value)}
