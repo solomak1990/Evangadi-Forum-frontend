@@ -22,12 +22,9 @@
   position: relative;
   margin: 0 auto;
   box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
-=======
   position: sticky;
   top: 0;
   z-index: 100;
->>>>>>> 35ad484c3bdb969e09520c0e8e10838a8dce1e80
 }
 
 

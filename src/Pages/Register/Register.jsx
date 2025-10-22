@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classes from "./register.module.css";
 import axios from "../../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
@@ -105,7 +105,6 @@ function Register() {
                     type="password"
                     placeholder="passWord"
                   />
-                  
                 </div>
                 <br />
                 <div className={classes.agree2}>
@@ -114,12 +113,13 @@ function Register() {
                     <span>and</span> <Link>terms of service.</Link>
                   </small>
                 </div>
-               
 
                 <button type="submit">Agree and Join</button>
-                <p className={classes.agree}>
-                  <Link to="/login">Already have an account?</Link>
-                </p>
+                <div className={classes.account}>
+                  <p className={classes.agree}>
+                    <Link to="/login">Already have an account?</Link>
+                  </p>
+                </div>
               </div>
             </form>
           </div>
