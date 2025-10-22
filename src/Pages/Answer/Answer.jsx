@@ -27,18 +27,17 @@ const Answer = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const response = await axios.get(`api/question/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(`/api/question/${id}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       });
       setQuestion(response.data.question);
       // Fetch answers separately since backend doesn't return them with question
       try {
-        const answersResponse = await axios.get(`api/answer/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
+        const answersResponse = await axios.get(`/api/answer/${id}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
         setAnswers(answersResponse.data.answers || []);
       } catch (answerError) {
-        console.log("No answers found or error fetching answers");
         setAnswers([]);
       }
     } catch (error) {
@@ -58,18 +57,21 @@ const Answer = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.post("api/answer", {
-        question_id: id,
-        answer: newAnswer,
-      }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.post(
+        "/api/answer",
+        {
+          question_id: id,
+          answer: newAnswer,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       
       setNewAnswer("");
       fetchQuestionDetails(); // Refresh answers
       alert("Answer posted successfully!");
     } catch (error) {
-      console.error("Error posting answer:", error);
       alert("Failed to post answer");
     }
   };
@@ -110,7 +112,7 @@ const Answer = () => {
             <textarea
               value={newAnswer}
               onChange={(e) => setNewAnswer(e.target.value)}
-              placeholder="Write your answer here..."
+              placeholder="Post your answers"
               className={classes.answerTextarea}
               rows={6}
             />
@@ -134,7 +136,7 @@ const Answer = () => {
                     {new Date().toLocaleDateString()}
                   </span>
                 </div>
-                <p className={classes.answerText}>{answer.answer}</p>
+                <p className={classes.answerText}>{answer.content}</p>
               </div>
             ))
           )}
