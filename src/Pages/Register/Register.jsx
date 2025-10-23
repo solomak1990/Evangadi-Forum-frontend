@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import axiosBase from "../../axiosConfig";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
 import styles from "./register.module.css";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 function Register() {
   const navigate = useNavigate();
   const userNameDom = useRef();
@@ -63,13 +63,13 @@ function Register() {
           <p className={styles.registerSubtitle}>
             Already have an account? <Link to="/login">Sign in</Link>
           </p>
-          
+
           <form onSubmit={handleSubmit} className={styles.registerForm}>
             <div className={styles.formGroup}>
-              <input 
-                ref={userNameDom} 
-                type="text" 
-                placeholder="Username" 
+              <input
+                ref={userNameDom}
+                type="text"
+                placeholder="Username"
                 className={styles.input}
                 required
               />
@@ -83,22 +83,24 @@ function Register() {
                 className={styles.input}
                 required
               />
-              <input
-                ref={lastnameDom}
-                type="text"
-                placeholder="Last name"
-                className={styles.input}
-                required
-              />
+            
+                <input
+                  ref={lastnameDom}
+                  type="text"
+                  placeholder="Last name"
+                  className={`${styles.input}${styles.lastName}`}
+                  required
+                />
+              
             </div>
 
             <div className={styles.formGroup}>
-              <input 
-                ref={emailDom} 
-                type="email" 
-                placeholder="Email address" 
+              <input
+                ref={emailDom}
+                type="email"
+                placeholder="Email address"
                 className={styles.input}
-                required 
+                required
               />
             </div>
 
@@ -117,15 +119,23 @@ function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label="Toggle password visibility"
                 >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </button>
               </div>
             </div>
 
             <div className={styles.consentRow}>
               <label>
-                <input type="checkbox" checked={agree} onChange={() => setAgree(!agree)} />
-                <span> I agree to the <a href="#">privacy policy</a> and <a href="#">terms of service</a>.</span>
+                <input
+                  type="checkbox"
+                  checked={agree}
+                  onChange={() => setAgree(!agree)}
+                />
+                <span>
+                  {" "}
+                  I agree to the <a href="#">privacy policy</a> and{" "}
+                  <a href="#">terms of service</a>.
+                </span>
               </label>
             </div>
 

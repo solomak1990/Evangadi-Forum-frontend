@@ -10,7 +10,11 @@ import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound.jsx";
 import QuestionList from "./Pages/Questionlist/QuestionList.jsx"
 import { getToken } from "./utils/tokenHelper.js";
-
+import HowItWorks from "./Pages/HowItWorks/HowItWorks.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword.jsx";
+import QuestionDetail from "./Pages/Questionlist/QuestionDetail.jsx";
+// import EditQuestion from "./Pages/EditQuestion/EidtQuestion.jsx";
 export const AppState = createContext();
 
 function App() {
@@ -54,11 +58,18 @@ function App() {
     <AppState.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/question" element={<Question />} />
         <Route path="/question/:id" element={<Answer />} />
+        <Route path="/question/:id" element={<QuestionDetail />} />
+        {/* <Route path="/question/edit/:id" element={<EditQuestion />} /> */}
+
+        <Route path="/question/:id/answer" element={<Answer />} />
+
         <Route path="/allquestion" element={<QuestionList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

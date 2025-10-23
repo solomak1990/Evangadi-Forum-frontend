@@ -1,4 +1,4 @@
-.login_conteiner {
+/* .login_conteiner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,9 +7,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 40px;
-}
+  
+} */
 
-.login_wrapper {
+
+
+
+/* .login_wrapper {
   box-sizing: border-box;
   width: 35%;
   height: 400px;
@@ -19,12 +23,15 @@
   justify-content: center;
   background-color: white;
   border-radius: 10px;
-  padding-bottom: 20px;
+  padding: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
+  margin:0;
+ 
+  border: 2px dashed red;
+} */
 
-.login__form {
+
+/* .login__form {
   box-sizing: border-box;
   width: 35%;
   height: 500px;
@@ -190,11 +197,11 @@
 .how button {
   background-color: #fe8402;
   /* margin-bottom: 70px; */
-  text-decoration: none;
+  /* text-decoration: none;
   color: #f8f8f8;
   border: none;
   margin: 20px;
   padding: 10px;
   border-radius: 5px;
   font-size: 20px;
-}
+} */ 
