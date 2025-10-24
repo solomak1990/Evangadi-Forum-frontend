@@ -1,154 +1,99 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { UserContext } from "../../component/Dataprovider/DataProvider";
+import React, { useEffect, useState, useContext } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "../../axiosConfig";
 import Layout from "../../component/Layout/Layout";
-import classes from "./answer.module.css";
+import { UserContext } from "../../component/Dataprovider/DataProvider";
+import "./answer.module.css"; // optional
 
-const Answer = () => {
-  const { id } = useParams();
+function Answer() {
+  const { question_id } = useParams(); // get question id from URL
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const [userData] = useContext(UserContext);
-  const [question, setQuestion] = useState(null);
+
   const [answers, setAnswers] = useState([]);
-  const [newAnswer, setNewAnswer] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    if (!userData.user) {
-      navigate("/login");
-      return;
-    }
-    fetchQuestionDetails();
-  }, [id, userData.user, navigate]);
-
-  const fetchQuestionDetails = async () => {
-    try {
-      setLoading(true);
-      const token = localStorage.getItem("token");
-      const response = await axios.get(`/api/question/${id}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-      });
-      setQuestion(response.data.question);
-
+    const fetchAnswers = async () => {
       try {
-        const answersResponse = await axios.get(`/api/answer/${id}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
-        setAnswers(answersResponse.data.answers || []);
-      } catch {
-        setAnswers([]);
+        const response = await axios.get(`/answer/${question_id}`);
+        setAnswers(response.data.answers); // match backend { answers }
+      } catch (err) {
+        console.error("Error fetching answers:", err);
+        setError("Failed to load answers.");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching question:", error);
-      setError("Failed to load question details");
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+    fetchAnswers();
+  }, [question_id]);
 
-  const handleSubmitAnswer = async (e) => {
-    e.preventDefault();
-    if (!newAnswer.trim()) {
-      setError("Please enter your answer");
-      setSuccess("");
-      return;
-    }
-
+  const handleDelete = async (answerId) => {
+    if (!window.confirm("Are you sure you want to delete this answer?")) return;
     try {
-      const token = localStorage.getItem("token");
-      await axios.post(
-        "/api/answer",
-        { question_id: id, answer: newAnswer },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      setNewAnswer("");
-      setError("");
-      setSuccess("Answer posted successfully!");
-
-      // Auto-clear success message after 3 seconds
-      setTimeout(() => setSuccess(""), 3000);
-
-      fetchQuestionDetails(); // Refresh answers
-    } catch {
-      setError("Failed to post answer");
-      setSuccess("");
+      await axios.delete(`/answer/${answerId}`);
+      setAnswers((prev) => prev.filter((a) => a.answer_id !== answerId));
+    } catch (err) {
+      alert("Error deleting answer.");
     }
   };
 
-  if (loading) {
-    return (
-      <Layout>
-        <div className={classes.loading}>Loading question details...</div>
-      </Layout>
-    );
-  }
+  const handleEdit = (answerId) => {
+    navigate(`/answers/edit/${answerId}`);
+  };
 
-  if (error && !question) {
-    return (
-      <Layout>
-        <div className={classes.error}>Error loading question: {error}</div>
-      </Layout>
-    );
-  }
+  if (loading) return <Layout><p>Loading answers...</p></Layout>;
+  if (error) return <Layout><p>{error}</p></Layout>;
 
   return (
     <Layout>
-      <div className={classes.container}>
-        {/* Question Section */}
-        <div className={classes.questionSection}>
-          <h1 className={classes.questionTitle}>{question.title}</h1>
-          <p className={classes.questionDescription}>{question.content}</p>
-          <div className={classes.questionMeta}>
-            <span>Asked by: {question.user_id}</span>
-            <span>{new Date().toLocaleDateString()}</span>
-          </div>
+      <div className="answer-container">
+        <div className="answer-header">
+          <h2>All Answers</h2>
+          <Link to={`/answers/new/${question_id}`} className="add-btn">
+            + Add Answer
+          </Link>
         </div>
 
-        {/* Answer Form */}
-        <div className={classes.answerFormSection}>
-          <h3>Your Answer</h3>
-          {error && <p className={classes.error}>{error}</p>}
-          {success && <p className={classes.success}>{success}</p>}
-          <form onSubmit={handleSubmitAnswer}>
-            <textarea
-              value={newAnswer}
-              onChange={(e) => setNewAnswer(e.target.value)}
-              placeholder="Post your answer"
-              className={`${classes.answerTextarea} ${error ? classes.inputError : ""}`}
-              rows={6}
-            />
-            <button type="submit" className={classes.submitButton}>
-              Post Answer
-            </button>
-          </form>
-        </div>
-
-        {/* Existing Answers */}
-        <div className={classes.answersSection}>
-          <h3>
-            {answers.length} Answer{answers.length !== 1 ? "s" : ""}
-          </h3>
-          {answers.length === 0 ? (
-            <p className={classes.noAnswers}>No answers yet. Be the first to answer!</p>
-          ) : (
-            answers.map((answer, index) => (
-              <div key={index} className={classes.answerItem}>
-                <div className={classes.answerHeader}>
-                  <span className={classes.answerAuthor}>{answer.user_name || "Anonymous"}</span>
-                  <span className={classes.answerDate}>{new Date().toLocaleDateString()}</span>
+        {answers.length === 0 ? (
+          <p>No answers yet.</p>
+        ) : (
+          <div className="answer-list">
+            {answers.map((ans) => (
+              <div className="answer-card" key={ans.answer_id}>
+                <div className="answer-content">
+                  <h3 className="answer-title">{ans.user_name}</h3>
+                  <p className="answer-text">
+                    {ans.content.length > 120
+                      ? ans.content.slice(0, 120) + "..."
+                      : ans.content}
+                  </p>
                 </div>
-                <p className={classes.answerText}>{answer.content}</p>
+
+                {user && user.userid === ans.user_id && (
+                  <div className="answer-actions">
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEdit(ans.answer_id)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(ans.answer_id)}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
+                )}
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </Layout>
   );
-};
+}
 
 export default Answer;
