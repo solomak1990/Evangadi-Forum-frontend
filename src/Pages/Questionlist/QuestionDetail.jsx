@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../axiosConfig";
+import { UserContext } from "../../component/Dataprovider/DataProvider";
 import classes from "../../Pages/Answer/answer.module.css";
 
 const QuestionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [userData] = useContext(UserContext);
+  const user = userData?.user;
 
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -19,6 +22,11 @@ const QuestionDetail = () => {
   const [editedDescription, setEditedDescription] = useState("");
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  
+  // Answer editing states
+  const [editingAnswerId, setEditingAnswerId] = useState(null);
+  const [editedAnswerContent, setEditedAnswerContent] = useState("");
+  const [answerDeleteConfirm, setAnswerDeleteConfirm] = useState(null);
 
   const token = localStorage.getItem("auth-token");
 
@@ -135,6 +143,69 @@ const QuestionDetail = () => {
     setShowDeleteConfirm(false);
   };
 
+  // Answer edit handlers
+  const handleEditAnswer = (answerId, currentContent) => {
+    setEditingAnswerId(answerId);
+    setEditedAnswerContent(currentContent);
+  };
+
+  const handleSaveAnswer = async (answerId) => {
+    if (!editedAnswerContent.trim()) {
+      setError("Answer content cannot be empty.");
+      return;
+    }
+    try {
+      await axios.put(
+        `api/answer/${answerId}`,
+        { answer: editedAnswerContent },
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      setAnswers((prev) => 
+        prev.map((a) => 
+          a.answer_id === answerId ? { ...a, content: editedAnswerContent } : a
+        )
+      );
+      setEditingAnswerId(null);
+      setEditedAnswerContent("");
+      setError("");
+      setSuccess("Answer updated successfully!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      console.error("Error updating answer:", err);
+      setError("Failed to update answer");
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingAnswerId(null);
+    setEditedAnswerContent("");
+  };
+
+  // Answer delete handlers
+  const handleDeleteAnswerClick = (answerId) => {
+    setAnswerDeleteConfirm(answerId);
+  };
+
+  const handleConfirmDeleteAnswer = async (answerId) => {
+    try {
+      await axios.delete(`api/answer/${answerId}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      setAnswers((prev) => prev.filter((a) => a.answer_id !== answerId));
+      setAnswerDeleteConfirm(null);
+      setSuccess("Answer deleted successfully!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      console.error("Error deleting answer:", err);
+      setError("Failed to delete answer");
+      setAnswerDeleteConfirm(null);
+    }
+  };
+
+  const handleCancelDeleteAnswer = () => {
+    setAnswerDeleteConfirm(null);
+  };
+
   if (loading) return <div className="text-center py-4">Loading...</div>;
 
   return (
@@ -226,7 +297,7 @@ const QuestionDetail = () => {
         </>
       )}
 
-      {/* Answers Section */}
+      {/* ✅ Answers Section */}
       <div className="mt-4">
         <h4>Answers</h4>
         {answers.length === 0 ? (
@@ -242,7 +313,74 @@ const QuestionDetail = () => {
                   {new Date().toLocaleDateString()}
                 </span>
               </div>
-              <p className={classes.answerText}>{answer.content}</p>
+
+              {/* Answer content - either display or edit form */}
+              {editingAnswerId === answer.answer_id ? (
+                <div className="mt-2">
+                  <textarea
+                    className={`form-control mb-2 ${error ? classes.inputError : ""}`}
+                    rows="3"
+                    value={editedAnswerContent}
+                    onChange={(e) => setEditedAnswerContent(e.target.value)}
+                    placeholder="Edit your answer..."
+                  />
+                  <div className="mb-2">
+                    <button
+                      className="btn btn-success me-2 rounded px-3"
+                      onClick={() => handleSaveAnswer(answer.answer_id)}
+                    >
+                      Save Changes
+                    </button>
+                    <button
+                      className="btn btn-secondary rounded px-3"
+                      onClick={handleCancelEdit}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p className={classes.answerText}>{answer.content}</p>
+
+                  {/* Answer action buttons */}
+                  {user && user.userid === answer.user_id && (
+                    <div className="mt-2">
+                      <button
+                        className="btn btn-outline-primary me-2 rounded px-3"
+                        onClick={() => handleEditAnswer(answer.answer_id, answer.content)}
+                      >
+                        Edit Answer
+                      </button>
+                      <button
+                        className="btn btn-outline-danger rounded px-3"
+                        onClick={() => handleDeleteAnswerClick(answer.answer_id)}
+                      >
+                        Delete Answer
+                      </button>
+
+                      {/* Delete confirmation */}
+                      {answerDeleteConfirm === answer.answer_id && (
+                        <div className="mt-2">
+                          <span>Are you sure?</span>
+                          <button
+                            className="btn btn-danger ms-2 px-3"
+                            onClick={() => handleConfirmDeleteAnswer(answer.answer_id)}
+                          >
+                            Yes
+                          </button>
+                          <button
+                            className="btn btn-secondary ms-2 px-3"
+                            onClick={handleCancelDeleteAnswer}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           ))
         )}
@@ -269,6 +407,3 @@ const QuestionDetail = () => {
 };
 
 export default QuestionDetail;
-
-
-
