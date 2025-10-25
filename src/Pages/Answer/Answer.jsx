@@ -3,10 +3,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "../../axiosConfig";
 import Layout from "../../component/Layout/Layout";
 import { UserContext } from "../../component/Dataprovider/DataProvider";
-import "./answer.module.css"; // optional
+import classes from "./answer.module.css";
 
 function Answer() {
-  const { question_id } = useParams(); // get question id from URL
+  const { question_id } = useParams();
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -14,11 +14,15 @@ function Answer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const token = localStorage.getItem("auth-token");
+
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
-        const response = await axios.get(`/answer/${question_id}`);
-        setAnswers(response.data.answers); // match backend { answers }
+        const response = await axios.get(`api/answer/${question_id}`, {
+          headers: { Authorization: "Bearer " + token },
+        });
+        setAnswers(response.data.answers || []);
       } catch (err) {
         console.error("Error fetching answers:", err);
         setError("Failed to load answers.");
@@ -27,15 +31,17 @@ function Answer() {
       }
     };
     fetchAnswers();
-  }, [question_id]);
+  }, [question_id, token]);
 
   const handleDelete = async (answerId) => {
-    if (!window.confirm("Are you sure you want to delete this answer?")) return;
     try {
-      await axios.delete(`/answer/${answerId}`);
+      await axios.delete(`api/answer/${answerId}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
       setAnswers((prev) => prev.filter((a) => a.answer_id !== answerId));
     } catch (err) {
-      alert("Error deleting answer.");
+      console.error("Error deleting answer:", err);
+      alert(err.response?.data?.message || "Failed to delete answer.");
     }
   };
 
@@ -43,44 +49,44 @@ function Answer() {
     navigate(`/answers/edit/${answerId}`);
   };
 
-  if (loading) return <Layout><p>Loading answers...</p></Layout>;
-  if (error) return <Layout><p>{error}</p></Layout>;
+  if (loading) return <Layout><p className={classes.loading}>Loading answers...</p></Layout>;
+  if (error) return <Layout><p className={classes.error}>{error}</p></Layout>;
 
   return (
     <Layout>
-      <div className="answer-container">
-        <div className="answer-header">
-          <h2>All Answers</h2>
-          <Link to={`/answers/new/${question_id}`} className="add-btn">
-            + Add Answer
-          </Link>
-        </div>
+      <div className={classes.container}>
+        <div className={classes.answersSection}>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h3>All Answers</h3>
+            <Link to={`/answers/new/${question_id}`} className={classes.submitButton}>
+              + Add Answer
+            </Link>
+          </div>
 
-        {answers.length === 0 ? (
-          <p>No answers yet.</p>
-        ) : (
-          <div className="answer-list">
-            {answers.map((ans) => (
-              <div className="answer-card" key={ans.answer_id}>
-                <div className="answer-content">
-                  <h3 className="answer-title">{ans.user_name}</h3>
-                  <p className="answer-text">
-                    {ans.content.length > 120
-                      ? ans.content.slice(0, 120) + "..."
-                      : ans.content}
-                  </p>
+          {answers.length === 0 ? (
+            <p className={classes.noAnswers}>No answers yet. Be the first to answer!</p>
+          ) : (
+            answers.map((ans) => (
+              <div key={ans.answer_id} className={classes.answerItem}>
+                <div className={classes.answerHeader}>
+                  <span className={classes.answerAuthor}>{ans.user_name || "Anonymous"}</span>
+                  <span className={classes.answerDate}>
+                    {new Date(ans.created_at).toLocaleDateString()}
+                  </span>
                 </div>
+                <p className={classes.answerText}>{ans.content}</p>
 
-                {user && user.userid === ans.user_id && (
-                  <div className="answer-actions">
+                {/* Buttons visible to all logged-in users */}
+                {user && (
+                  <div className={classes.actionButtons}>
                     <button
-                      className="edit-btn"
+                      className={classes.editButton}
                       onClick={() => handleEdit(ans.answer_id)}
                     >
                       ✏️ Edit
                     </button>
                     <button
-                      className="delete-btn"
+                      className={classes.deleteButton}
                       onClick={() => handleDelete(ans.answer_id)}
                     >
                       🗑️ Delete
@@ -88,9 +94,9 @@ function Answer() {
                   </div>
                 )}
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
       </div>
     </Layout>
   );
