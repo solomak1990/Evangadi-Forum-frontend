@@ -5,6 +5,7 @@ import axios from "../../axiosConfig";
 import { UserContext } from "../../component/Dataprovider/DataProvider";
 import Layout from "../../component/Layout/Layout";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ButtonSpinner } from "../../component/LoadingSpinner/LoadingSpinner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -24,9 +26,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+    setLoading(true);
 
     if (!formData.email || !formData.password) {
       setErrorMsg("Please fill in all fields");
+      setLoading(false);
       return;
     }
 
@@ -44,6 +48,8 @@ const Login = () => {
       setErrorMsg(
         error.response?.data?.message || "Invalid credentials or server error"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,9 +104,14 @@ const Login = () => {
 
                 {errorMsg && <p className={styles.error}>{errorMsg}</p>}
 
-                <button type="submit" className={styles.loginButton}>
+                <ButtonSpinner
+                  type="submit"
+                  loading={loading}
+                  className={styles.loginButton}
+                  disabled={loading}
+                >
                   Login
-                </button>
+                </ButtonSpinner>
               </form>
             </div>
           </div>
