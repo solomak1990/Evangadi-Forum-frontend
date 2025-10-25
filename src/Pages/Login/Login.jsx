@@ -75,7 +75,7 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-                <div>
+                <div className={styles.password_container}>
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -98,9 +98,6 @@ const Login = () => {
                 <div className={styles.loginFooter}>
                   <Link to="/forgot-password" className={styles.forgetLink}>
                     Forgot password?          
-                  </Link>
-                  <Link to="/forgot-password" className={styles.forgetLink}>
-                    Forgot password?
                   </Link>
                 </div>
 
@@ -127,15 +124,8 @@ const Login = () => {
                 starting elementary school or being promoted to CEO of a Fortune
                 500 company, you have much to offer to those who are trying to
                 follow in your footsteps.
-                No matter what stage of life you are in, whether you’re just
-                starting elementary school or being promoted to CEO of a Fortune
-                500 company, you have much to offer to those who are trying to
-                follow in your footsteps.
               </p>
               <p className={styles.aboutText}>
-                Whether you are willing to share your knowledge or you are just
-                looking to meet mentors of your own, please start by joining the
-                network here.
                 Whether you are willing to share your knowledge or you are just
                 looking to meet mentors of your own, please start by joining the
                 network here.
@@ -143,7 +133,6 @@ const Login = () => {
               <Link to="/how-it-works">
                 <button className={styles.aboutButton}>HOW IT WORKS</button>
               </Link>
-              
             </div>
           </div>
         </div>
