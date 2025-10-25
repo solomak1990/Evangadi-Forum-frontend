@@ -1,118 +1,103 @@
-/* =========================
+/* /* =========================
    General Layout
 ========================= */
 .login_container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* stack form and description on small screens */
+  flex-wrap: wrap;
   background-color: #f8f8f8;
   background-image: url("../../assets/BG.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 60px 20px;
-  gap: 40px; /* space between form and description */
+    /* max-width: 1000px;   */
+  padding: 20px 20px;
+  gap: 40px;
+   border-radius: 20px;
+  font-family:sans-serif;
+  min-height: 90vh;
 }
 
 /* =========================
    Form Wrapper
 ========================= */
 .login_wrapper {
-  box-sizing: border-box;
-  width: 40%;
-  min-width: 320px;
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
+  width: 100%;
+  max-width: 420px;
+  background-color: #ffffff;
   border-radius: 12px;
-  padding: 30px 20px 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 30px 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* .login_form {
+  width: 100%;
+  text-align: center;
+} */
+
+/* =========================
+   Form Header
+========================= */
+.login_title {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.login_form small {
+  display: block;
   margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.login_form small a {
+  color: #fe8402;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login_form small a:hover {
+  text-decoration: underline;
 }
 
 /* =========================
-   Form Styles
+   Input Fields
 ========================= */
-.login_form {
-  width: 100%;
-}
-
-.login_title {
-  color: #4b456f;
-  margin-bottom: 5px;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
-}
-
-.login_form a {
-  color: chocolate;
-  text-decoration: none;
-}
-
-.login_form_input {
-  font-size: 14px;
-  padding: 10px;
-}
-
 .login_form_input input {
+  width: 100%;
   font-size: 15px;
-  padding: 12px 10px;
-  border: 1px solid #999;
-  border-radius: 3px;
-  width: 95%;
-  margin-bottom: -10px;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
   transition: border-color 0.3s ease;
 }
 
 .login_form_input input:focus {
   outline: none;
-  border-bottom: 2px solid #fe8402;
+  border-color: #fe8402;
 }
 
-/* =========================
-   Input Groups
-========================= */
+/* Grouped First/Last name */
 .first_last {
   display: flex;
   gap: 10px;
 }
 
-
-.user,
-.email,
-.password {
-  border: 1px solid #999;
-  border-radius: 3px;
-  margin-bottom: -10px;
-  padding: 10px 5px;
-  width: 98%;
-   box-sizing: border-box;
-  min-width: 0; 
+.first_last input {
+  flex: 1;
 }
 
-
-.user,
-.email,
-.password {
-  width: 95%;
-}
-
-/* =========================
-   Password Field Wrapper
-========================= */
-
+/* Password visibility icon */
 .passwordWrapper {
   position: relative;
-  width: 95%;
 }
 
 .passwordWrapper input {
   width: 100%;
-  padding-right: 40px; /* make space for the icon */
+  padding-right: 40px;
 }
 
 .eyeIcon {
@@ -130,23 +115,55 @@
   color: #fe8402;
 }
 
+/* =========================
+   Error & Success Messages
+========================= */
+.error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #188038;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.inputError {
+  border: 2px solid #d93025 !important;
+}
 
 /* =========================
-   Buttons
+   Buttons & Agreement
 ========================= */
+.agree2 {
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 10px 0 20px;
+  color: #666;
+}
+
+.agree2 a {
+  color: #fe8402;
+  text-decoration: none;
+}
+
+.agree2 a:hover {
+  text-decoration: underline;
+}
+
 .login_form_input button {
   width: 100%;
-  padding: 12px 5px;
-  border: none;
-  border-radius: 6px;
+  padding: 12px;
   background-color: #fe8402;
   color: white;
-  margin: 20px 0 30px;
-  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .login_form_input button:hover {
@@ -154,101 +171,64 @@
   transform: translateY(-2px);
 }
 
-/* =========================
-   Terms and Links
-========================= */
-.agree2 {
+/* Already have account link */
+.account p {
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 15px;
-  font-size: 13px;
 }
 
-.agree2 a {
-  color: #da7000;
+.account p a {
+  color: #fe8402;
   text-decoration: none;
+  font-weight: 500;
 }
 
-.account p {
-  margin-top: -25px;
-}
-
-.agree {
-  text-align: center;
-  color: #da7000;
-  align-items: center;
-  font-size: 12px;
-}
-
-.agree a {
-  text-decoration: none;
+.account p a:hover {
+  text-decoration: underline;
 }
 
 /* =========================
-   Description Section
+   Right-Side Description
 ========================= */
 .Evangadi_description {
-  color: #656565;
   width: 35%;
-  max-width: 500px;
-}
-
-.Evangadi_description h2 {
-  background: linear-gradient(to right, #fd5310, #000);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  max-width: 480px;
+  color: #555;
+  line-height: 1.6;
 }
 
 .title_link a {
-  color: #da7000;
+  color: #fe8402;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .title {
-  font-size: 40px;
   color: #4b456f;
-  margin: 10px;
+  font-size: 2rem;
+  margin: 10px 0 20px;
 }
 
-.aboutButton,
-.how button {
+.Evangadi_description p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.aboutButton {
   background-color: #fe8402;
-  text-decoration: none;
-  color: #f8f8f8;
+  color: white;
   border: none;
-  margin: 20px;
-  padding: 10px 16px;
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 500;
   transition: background-color 0.3s ease;
 }
 
-.aboutButton:hover,
-.how button:hover {
+.aboutButton:hover {
   background-color: #e67c00;
-}
-
-/* =========================
-   Feedback Messages
-========================= */
-.error {
-  color: #d93025;
-  font-size: 0.9rem;
-  margin: 10px 0;
-  text-align: center;
-}
-
-.success {
-  color: #188038;
-  font-size: 0.9rem;
-  margin: 10px 0;
-  text-align: center;
-}
-
-.inputError {
-  border: 2px solid #d93025 !important;
 }
 
 /* =========================
@@ -258,25 +238,20 @@
   .login_container {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 40px 10px;
+    gap: 30px;
+    padding: 40px 15px;
   }
 
-  .login_wrapper,
   .Evangadi_description {
     width: 90%;
-    margin: 0;
-  }
-
-  .Evangadi_description {
     text-align: center;
   }
 
   .title {
-    font-size: 32px;
+    font-size: 1.6rem;
   }
 
   .aboutButton {
-    font-size: 16px;
+    font-size: 0.9rem;
   }
 }
