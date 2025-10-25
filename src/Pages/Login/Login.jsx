@@ -4,17 +4,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../axiosConfig';
 import { UserContext } from '../../component/Dataprovider/DataProvider';
 import Layout from '../../component/Layout/Layout';
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import AiOutlineEyeInvisible from "@mui/icons-material/Visibility";
+import AiOutlineEye from "@mui/icons-material/VisibilityOff";
 const Login = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useContext(UserContext);
 
-  
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -23,30 +21,29 @@ const Login = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg('');
+    setErrorMsg("");
 
     if (!formData.email || !formData.password) {
-      setErrorMsg('Please fill in all fields');
+      setErrorMsg("Please fill in all fields");
       return;
     }
 
     try {
-      const response = await axios.post('api/user/login', formData);
+      const response = await axios.post("api/user/login", formData);
 
       if (response.data.message === 'User login successful') {
         localStorage.setItem('token', response.data.token);
-         localStorage.setItem("username", response.data.user.username); 
         setUserData({ ...(userData || {}), token: response.data.token });
-        navigate('/home'); 
-        
+        navigate("/home");
       } else {
-        setErrorMsg(response.data.message || 'Login failed');
+        setErrorMsg(response.data.message || "Login failed");
       }
     } catch (error) {
-      setErrorMsg(error.response?.data?.message || 'Invalid credentials or server error');
+      setErrorMsg(
+        error.response?.data?.message || "Invalid credentials or server error"
+      );
     }
   };
 
@@ -72,30 +69,30 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <div style={{ marginTop: "6px" }}>
-                  <div className={styles.passwordWrapper}>
-                   
-                    <span
-                      className={styles.toggleIcon}
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? (
-                        <VisibilityOffIcon />
-                      ) : (
-                        <VisibilityIcon />
-                      )}
-                    </span>
-                  </div>
+                <div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <span
+                    className={styles.eye_icon}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible />
+                    ) : (
+                      <AiOutlineEye />
+                    )}
+                             
+                  </span>
                 </div>
                 <div className={styles.loginFooter}>
+                  <Link to="/forgot-password" className={styles.forgetLink}>
+                    Forgot password?          
+                  </Link>
                   <Link to="/forgot-password" className={styles.forgetLink}>
                     Forgot password?
                   </Link>
@@ -119,8 +116,15 @@ const Login = () => {
                 starting elementary school or being promoted to CEO of a Fortune
                 500 company, you have much to offer to those who are trying to
                 follow in your footsteps.
+                No matter what stage of life you are in, whether you’re just
+                starting elementary school or being promoted to CEO of a Fortune
+                500 company, you have much to offer to those who are trying to
+                follow in your footsteps.
               </p>
               <p className={styles.aboutText}>
+                Whether you are willing to share your knowledge or you are just
+                looking to meet mentors of your own, please start by joining the
+                network here.
                 Whether you are willing to share your knowledge or you are just
                 looking to meet mentors of your own, please start by joining the
                 network here.
@@ -128,8 +132,8 @@ const Login = () => {
               <Link to="/how-it-works">
                 <button className={styles.aboutButton}>HOW IT WORKS</button>
               </Link>
+              
             </div>
-            <div className={styles.pinkShape}></div>
           </div>
         </div>
       </div>

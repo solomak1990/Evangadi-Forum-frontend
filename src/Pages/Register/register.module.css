@@ -1,66 +1,282 @@
-
- 
- /* register.module.css */
-.registerSection {
-  background-color: #f9f9f9;
-    background-image: url("../../assets/BG.svg");
-  padding: 80px;
+/* =========================
+   General Layout
+========================= */
+.login_container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap; /* stack form and description on small screens */
+  background-color: #f8f8f8;
+  background-image: url("../../assets/BG.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  gap: 40px; /* space between form and description */
 }
 
-.registerContainer {
-  background-color: #ffffff;
-  padding: 32px;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+/* =========================
+   Form Wrapper
+========================= */
+.login_wrapper {
+  box-sizing: border-box;
+  width: 40%;
+  min-width: 320px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px 20px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* =========================
+   Form Styles
+========================= */
+.login_form {
   width: 100%;
-  margin: 0 auto; 
-  max-width: 500px;
+}
 
-   
+.login_title {
+  color: #4b456f;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
-.registerTitle {
-  color: #222;
-  font-size: 2rem;
-  font-weight: bold;
+
+.login_form a {
+  color: chocolate;
+  text-decoration: none;
 }
+
+.login_form_input {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.login_form_input input {
+  font-size: 15px;
+  padding: 12px 10px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 95%;
+  margin-bottom: -10px;
+  transition: border-color 0.3s ease;
+}
+
+.login_form_input input:focus {
+  outline: none;
+  border-bottom: 2px solid #fe8402;
+}
+
+/* =========================
+   Input Groups
+========================= */
+.first_last {
+  display: flex;
+  gap: 10px;
+}
+
+
+.user,
+.email,
+.password {
+  border: 1px solid #999;
+  border-radius: 3px;
+  margin-bottom: -10px;
+  padding: 10px 5px;
+  width: 98%;
+   box-sizing: border-box;
+  min-width: 0; 
+}
+
+
+.user,
+.email,
+.password {
+  width: 95%;
+}
+
+/* =========================
+   Password Field Wrapper
+========================= */
+
 .passwordWrapper {
   position: relative;
+  width: 95%;
 }
 
-.input {
+.passwordWrapper input {
   width: 100%;
-  padding: 0.75rem 2.5rem 0.75rem 0.75rem; 
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.rowGroup{
-  display: flex;
-  gap: 20px;
+  padding-right: 40px; /* make space for the icon */
 }
 
- .formGroup,
-.rowGroup {
-  margin-bottom: 1.5rem;
-}
-
-.eyeButton {
+.eyeIcon {
   position: absolute;
+  right: 12px;
   top: 50%;
-  right: 10px;
   transform: translateY(-50%);
-  background: none;
-  outline: none;
-  border: none;
+  color: #777;
   cursor: pointer;
-  padding: 0;
-  color: #555;
+  font-size: 18px;
+  transition: color 0.2s ease;
 }
 
-.eyeButton:hover {
-  background-color: transparent;
+.eyeIcon:hover {
+  color: #fe8402;
 }
+
+
+/* =========================
+   Buttons
+========================= */
+.login_form_input button {
+  width: 100%;
+  padding: 12px 5px;
+  border: none;
+  border-radius: 6px;
+  background-color: #fe8402;
+  color: white;
+  margin: 20px 0 30px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login_form_input button:hover {
+  background-color: #e67c00;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Terms and Links
+========================= */
+.agree2 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.agree2 a {
+  color: #da7000;
+  text-decoration: none;
+}
+
+.account p {
+  margin-top: -25px;
+}
+
+.agree {
+  text-align: center;
+  color: #da7000;
+  align-items: center;
+  font-size: 12px;
+}
+
+.agree a {
+  text-decoration: none;
+}
+
+/* =========================
+   Description Section
+========================= */
+.Evangadi_description {
+  color: #656565;
+  width: 35%;
+  max-width: 500px;
+}
+
+.Evangadi_description h2 {
+  background: linear-gradient(to right, #fd5310, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title_link a {
+  color: #da7000;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.title {
+  font-size: 40px;
+  color: #4b456f;
+  margin: 10px;
+}
+
+.aboutButton,
+.how button {
+  background-color: #fe8402;
+  text-decoration: none;
+  color: #f8f8f8;
+  border: none;
+  margin: 20px;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.aboutButton:hover,
+.how button:hover {
+  background-color: #e67c00;
+}
+
+/* =========================
+   Feedback Messages
+========================= */
+.error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.success {
+  color: #188038;
+  font-size: 0.9rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.inputError {
+  border: 2px solid #d93025 !important;
+}
+
+/* =========================
+   Responsive Design
+========================= */
 @media (max-width: 768px) {
-  .rowGroup { grid-template-columns: 1fr; }
-  .registerContainer { padding: 24px; }
+  .login_container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 10px;
+  }
+
+  .login_wrapper,
+  .Evangadi_description {
+    width: 90%;
+    margin: 0;
+  }
+
+  .Evangadi_description {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .aboutButton {
+    font-size: 16px;
+  }
 }

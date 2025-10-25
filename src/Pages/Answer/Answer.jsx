@@ -14,6 +14,7 @@ const Answer = () => {
   const [newAnswer, setNewAnswer] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (!userData.user) {
@@ -31,13 +32,13 @@ const Answer = () => {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       });
       setQuestion(response.data.question);
-      // Fetch answers separately since backend doesn't return them with question
+
       try {
         const answersResponse = await axios.get(`/api/answer/${id}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
         setAnswers(answersResponse.data.answers || []);
-      } catch (answerError) {
+      } catch {
         setAnswers([]);
       }
     } catch (error) {
@@ -51,7 +52,8 @@ const Answer = () => {
   const handleSubmitAnswer = async (e) => {
     e.preventDefault();
     if (!newAnswer.trim()) {
-      alert("Please enter your answer");
+      setError("Please enter your answer");
+      setSuccess("");
       return;
     }
 
@@ -59,20 +61,21 @@ const Answer = () => {
       const token = localStorage.getItem("token");
       await axios.post(
         "/api/answer",
-        {
-          question_id: id,
-          answer: newAnswer,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { question_id: id, answer: newAnswer },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      
+
       setNewAnswer("");
+      setError("");
+      setSuccess("Answer posted successfully!");
+
+      // Auto-clear success message after 3 seconds
+      setTimeout(() => setSuccess(""), 3000);
+
       fetchQuestionDetails(); // Refresh answers
-      alert("Answer posted successfully!");
-    } catch (error) {
-      alert("Failed to post answer");
+    } catch {
+      setError("Failed to post answer");
+      setSuccess("");
     }
   };
 
@@ -84,7 +87,7 @@ const Answer = () => {
     );
   }
 
-  if (error || !question) {
+  if (error && !question) {
     return (
       <Layout>
         <div className={classes.error}>Error loading question: {error}</div>
@@ -108,12 +111,14 @@ const Answer = () => {
         {/* Answer Form */}
         <div className={classes.answerFormSection}>
           <h3>Your Answer</h3>
+          {error && <p className={classes.error}>{error}</p>}
+          {success && <p className={classes.success}>{success}</p>}
           <form onSubmit={handleSubmitAnswer}>
             <textarea
               value={newAnswer}
               onChange={(e) => setNewAnswer(e.target.value)}
-              placeholder="Post your answers"
-              className={classes.answerTextarea}
+              placeholder="Post your answer"
+              className={`${classes.answerTextarea} ${error ? classes.inputError : ""}`}
               rows={6}
             />
             <button type="submit" className={classes.submitButton}>
@@ -124,17 +129,17 @@ const Answer = () => {
 
         {/* Existing Answers */}
         <div className={classes.answersSection}>
-          <h3>{answers.length} Answer{answers.length !== 1 ? 's' : ''}</h3>
+          <h3>
+            {answers.length} Answer{answers.length !== 1 ? "s" : ""}
+          </h3>
           {answers.length === 0 ? (
             <p className={classes.noAnswers}>No answers yet. Be the first to answer!</p>
           ) : (
             answers.map((answer, index) => (
               <div key={index} className={classes.answerItem}>
                 <div className={classes.answerHeader}>
-                  <span className={classes.answerAuthor}>{answer.user_name || 'Anonymous'}</span>
-                  <span className={classes.answerDate}>
-                    {new Date().toLocaleDateString()}
-                  </span>
+                  <span className={classes.answerAuthor}>{answer.user_name || "Anonymous"}</span>
+                  <span className={classes.answerDate}>{new Date().toLocaleDateString()}</span>
                 </div>
                 <p className={classes.answerText}>{answer.content}</p>
               </div>
