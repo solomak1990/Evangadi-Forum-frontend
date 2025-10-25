@@ -3,6 +3,8 @@ import classes from "./register.module.css";
 import axios from "../../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -23,7 +25,13 @@ function Register() {
     const emailValue = emailDom.current.value.trim();
     const passValue = passwordDom.current.value.trim();
 
-    if (!usernameValue || !firstValue || !lastValue || !emailValue || !passValue) {
+    if (
+      !usernameValue ||
+      !firstValue ||
+      !lastValue ||
+      !emailValue ||
+      !passValue
+    ) {
       setError("Please provide all required information.");
       setSuccess("");
       return;
@@ -50,7 +58,7 @@ function Register() {
 
   return (
     <Layout>
-      <section className={classes.login_conteiner}>
+      <section className={classes.login_container}>
         <div className={classes.login_wrapper}>
           <div className={classes.login_form}>
             <form onSubmit={handleSubmit} className={classes.login_form_input}>
@@ -65,7 +73,11 @@ function Register() {
               <div className={classes.inputs}>
                 <div>
                   <input
-                    className={`${classes.user} ${error && !usernameDom.current?.value ? classes.inputError : ""}`}
+                    className={`${classes.user} ${
+                      error && !usernameDom.current?.value
+                        ? classes.inputError
+                        : ""
+                    }`}
                     ref={usernameDom}
                     type="text"
                     placeholder="Username"
@@ -75,7 +87,11 @@ function Register() {
                 <div className={classes.first_last}>
                   <div>
                     <input
-                      className={`${classes.first} ${error && !firstnameDom.current?.value ? classes.inputError : ""}`}
+                      className={`${classes.first} ${
+                        error && !firstnameDom.current?.value
+                          ? classes.inputError
+                          : ""
+                      }`}
                       ref={firstnameDom}
                       type="text"
                       placeholder="First Name"
@@ -83,7 +99,11 @@ function Register() {
                   </div>
                   <div>
                     <input
-                      className={`${classes.last} ${error && !lastnameDom.current?.value ? classes.inputError : ""}`}
+                      className={`${classes.last} ${
+                        error && !lastnameDom.current?.value
+                          ? classes.inputError
+                          : ""
+                      }`}
                       ref={lastnameDom}
                       type="text"
                       placeholder="Last Name"
@@ -93,28 +113,38 @@ function Register() {
                 <br />
                 <div>
                   <input
-                    className={`${classes.email} ${error && !emailDom.current?.value ? classes.inputError : ""}`}
+                    className={`${classes.email} ${
+                      error && !emailDom.current?.value
+                        ? classes.inputError
+                        : ""
+                    }`}
                     ref={emailDom}
                     type="email"
                     placeholder="Email"
                   />
                 </div>
                 <br />
-                <div>
+                <div className={classes.passwordWrapper}>
                   <input
-                    className={`${classes.password} ${error && !passwordDom.current?.value ? classes.inputError : ""}`}
                     ref={passwordDom}
                     type={showPassword ? "text" : "password"}
+                    className={`${classes.password} ${
+                      error && !passwordDom.current?.value
+                        ? classes.inputError
+                        : ""
+                    }`}
                     placeholder="Password"
                   />
-                  <button
-                    type="button"
+                  <span
+                    className={classes.eyeIcon}
                     onClick={() => setShowPassword(!showPassword)}
-                    className={classes.showPasswordBtn}
+                    role="button"
+                    aria-label="Toggle password visibility"
                   >
-                    {showPassword ? "Hide" : "Show"}
-                  </button>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
                 </div>
+
                 <br />
                 <div className={classes.agree2}>
                   <small>
@@ -141,10 +171,15 @@ function Register() {
           </small>
           <h2 className={classes.title}>Evangadi Networks</h2>
           <p>
-            No matter what stage of life you are in, whether you’re just starting elementary school or being promoted to CEO of a Fortune 500 company, you have much to offer to those who are trying to follow in your footsteps.
+            No matter what stage of life you are in, whether you’re just
+            starting elementary school or being promoted to CEO of a Fortune 500
+            company, you have much to offer to those who are trying to follow in
+            your footsteps.
           </p>
           <p className="font-p mg-bt-30">
-            Whether you are willing to share your knowledge or you are just looking to meet mentors of your own, please start by joining the network here.
+            Whether you are willing to share your knowledge or you are just
+            looking to meet mentors of your own, please start by joining the
+            network here.
           </p>
           <Link to="/how-it-works">
             <button className={classes.aboutButton}>HOW IT WORKS</button>

@@ -70,9 +70,11 @@ function App() {
     <AppState.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/question" element={<Question />} />
         <Route path="/question/:id" element={<QuestionDetail />} />
         <Route path="/answer/:id" element={<Answer />} />

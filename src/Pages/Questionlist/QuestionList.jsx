@@ -10,7 +10,7 @@ const QuestionList = ({ token, questions: questionsProp }) => {
     Array.isArray(questionsProp) ? questionsProp : []
   );
   const [error, setError] = useState("");
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const QuestionList = ({ token, questions: questionsProp }) => {
   useEffect(() => {
     if (Array.isArray(questionsProp) && questionsProp.length >= 0) {
       setQuestions(questionsProp);
-      // setLoading(false);
+      // // setLoading(false);
       return;
     }
 
@@ -38,6 +38,10 @@ const QuestionList = ({ token, questions: questionsProp }) => {
         setError("Failed to load questions.");
       }
       
+      // finally {
+      // //   setLoading(false);
+      // // }
+
       // finally {
       // //   setLoading(false);
       // // }
