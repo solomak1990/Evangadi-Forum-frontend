@@ -169,21 +169,23 @@ const SingleQuestion = () => {
                 </div>
                 <p className={classes.answerText}>{a.content}</p>
 
-                {/* Edit and Delete buttons for answer owner */}
+                {/* Edit and Delete buttons for answer owner - responsive */}
                 {user && user.userid === a.user_id && (
                   <div className="mt-2">
-                    <button
-                      className="btn btn-outline-primary me-2 rounded px-3"
-                      onClick={() => navigate(`/answers/edit/${a.answer_id}`)}
-                    >
-                      Edit Answer
-                    </button>
-                    <button
-                      className="btn btn-outline-danger rounded px-3"
-                      onClick={() => handleDeleteAnswer(a.answer_id)}
-                    >
-                      Delete Answer
-                    </button>
+                    <div className="d-flex flex-wrap gap-2">
+                      <button
+                        className="btn btn-outline-primary rounded px-3"
+                        onClick={() => navigate(`/answers/edit/${a.answer_id}`)}
+                      >
+                        Edit Answer
+                      </button>
+                      <button
+                        className="btn btn-outline-danger rounded px-3"
+                        onClick={() => handleDeleteAnswer(a.answer_id)}
+                      >
+                        Delete Answer
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
