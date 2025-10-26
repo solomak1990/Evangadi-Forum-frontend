@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import Layout from "../../component/Layout/Layout";
-import classes from "./Home.module.css";
+import classes from "./home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import QuestionList from "../Questionlist/QuestionList";
 import { UserContext } from "../../component/Dataprovider/DataProvider";

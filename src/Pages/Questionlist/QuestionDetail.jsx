@@ -590,20 +590,27 @@ const QuestionDetail = () => {
               <h4>Edit Question</h4>
               <input
                 type="text"
-                className={`form-control mb-2 ${error ? classes.inputError : ""}`}
+                className={`form-control mb-2 ${
+                  error ? classes.inputError : ""
+                }`}
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
                 placeholder="Title"
               />
               <textarea
-                className={`form-control mb-2 ${error ? classes.inputError : ""}`}
+                className={`form-control mb-2 ${
+                  error ? classes.inputError : ""
+                }`}
                 rows="4"
                 value={editedDescription}
                 onChange={(e) => setEditedDescription(e.target.value)}
                 placeholder="Description"
               ></textarea>
               <div className="mb-3">
-                <button className="btn btn-success me-2 rounded px-4" type="submit">
+                <button
+                  className="btn btn-success me-2 rounded px-4"
+                  type="submit"
+                >
                   Save Changes
                 </button>
                 <button
@@ -631,7 +638,9 @@ const QuestionDetail = () => {
       <div className="mt-4">
         <h4>Answers</h4>
         {answers.length === 0 ? (
-          <p className={classes.noAnswers}>No answers yet. Be the first to answer!</p>
+          <p className={classes.noAnswers}>
+            No answers yet. Be the first to answer!
+          </p>
         ) : (
           answers.map((answer, index) => (
             <div key={index} className={classes.answerItem}>

@@ -37,8 +37,8 @@ const Login = () => {
     try {
       const response = await axios.post("api/user/login", formData);
 
-      if (response.data.message === "User login successful") {
-        localStorage.setItem("token", response.data.token);
+      if (response.data.message === 'User login successful') {
+        localStorage.setItem('token', response.data.token);
         setUserData({ ...(userData || {}), token: response.data.token });
         navigate("/home");
       } else {
@@ -75,7 +75,7 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-                <div>
+                <div className={styles.password_container}>
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -95,7 +95,6 @@ const Login = () => {
                              
                   </span>
                 </div>
-
                 <div className={styles.loginFooter}>
                   <Link to="/forgot-password" className={styles.forgetLink}>
                     Forgot password?          
