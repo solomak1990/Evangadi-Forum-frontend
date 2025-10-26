@@ -1,10 +1,14 @@
-
+/* Wrapper and Background */
 .pageWrapper {
-  background-color: #fff;
+  background-color: #f8f8f8;
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 40px;
   box-sizing: border-box;
   position: relative;
+  background-image: url("../../assets/BG.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .loginPageContainer {
@@ -16,17 +20,27 @@
   position: relative;
 }
 
+/* Left and Right Sections */
 .loginLeft,
 .loginRight {
   flex: 1;
   padding: 20px;
   position: relative;
+
+}
+.loginRight h2{
+  background: linear-gradient(to right, #fd5310, #000); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
+/* For the Login Section */
 .loginLeft {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-right: 2px solid #e6e6e6; /* Vertical line */
 }
 
 .loginBox {
@@ -36,13 +50,13 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  position: relative;
   z-index: 2;
 }
 
 .loginHeading {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
+  color: #3b2063; /* Darker color for better visibility */
   margin-bottom: 10px;
 }
 
@@ -90,13 +104,13 @@
 
 .eye_icon {
   position: absolute;
-  right: 40px;
-  top: 180px;
+  right: 130px; /* Adjusted for better alignment */
+  top: 55%; /* Centered vertically */
+  transform: translateY(-50%); /* Centered vertically */
   cursor: pointer;
   font-size: 20px;
-  color: gray;
+  color: gray;
 }
-
 
 .error {
   color: red;
@@ -105,12 +119,11 @@
 }
 
 /* About Section */
-
-
 .aboutSection {
   max-width: 600px;
   z-index: 2;
   position: relative;
+  padding: 20px; /* Added padding for consistency */
 }
 
 .aboutTitle {
@@ -121,7 +134,7 @@
 
 .aboutHeading {
   color: #3b2063;
-  font-size: 32px;
+  font-size: 28px; /* Adjusted font size */
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -146,26 +159,8 @@
 
 .aboutButton:hover {
   background-color: #e66b1e;
-} 
-
-.blueShape {
-  position: absolute;
-  top: 100px;
-  left: 80px;
-  width: 200px;
-  height: 200px;
-  background: #bfc9f8;
-  border-top-right-radius: 60%;
-  z-index: 0;
 }
 
-.pinkShape {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 250px;
-  height: 200px;
-  background: #ffdbd2;
-  border-top-left-radius: 80%;
-  z-index: 0;
-} 
+
+
+ 

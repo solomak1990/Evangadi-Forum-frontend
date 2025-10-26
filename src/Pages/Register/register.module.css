@@ -1,131 +1,366 @@
-Register Page Styles
-.registerSection {
+
+/* =========================
+   Full Background & Layout
+========================= */
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f8f8f8;
+  background-image: url("../../assets/BG.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 40px 20px;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-}
-
-.registerContainer {
-  background-color: #ffffff;
-  padding: 32px;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+} */
+/* =========================
+   Full Background & Layout
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   width: 100%;
-  max-width: 520px;
+  font-family: sans-serif;
 }
 
-.registerTitle {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 10px;
+body {
+  background-color: #f8f8f8;
+  background-image: url("../../assets/BG.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/* =========================
+   Container
+========================= */
+.login_container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 40px 60px; /* wider horizontal padding */
+  width: 90vw;         /* wider than tall */
+  height: 70vh;        /* shorter height */
+  max-width: 1600px;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* =========================
+   Vertical Divider
+========================= */
+.login_container::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background-color: #ddd;
+  z-index: 0;
+}
+
+/* =========================
+   Registration Box
+========================= */
+.login_wrapper {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =========================
+   Form Styling
+========================= */
+.login_form_input {
+  width: 100%;
+}
+
+.login_title {
   color: #333;
-  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.registerSubtitle {
-  margin-bottom: 30px;
-  font-size: 14px;
-  text-align: center;
-  color: #666;
+.login_form_input small {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
-.registerSubtitle a {
-  color: #ff7f2a;
+.login_form_input small a {
+  color: #fe8402;
   text-decoration: none;
   font-weight: 500;
 }
 
-.registerForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.login_form_input small a:hover {
+  text-decoration: underline;
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #333;
-  font-size: 14px;
-}
-
-.input {
-  padding: 14px 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+/* =========================
+   Input Fields
+========================= */
+.inputs input {
+  width: 100%;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
   transition: border-color 0.3s ease;
-  background-color: #fff;
 }
 
-.input:focus {
-  border-color: #ff7f2a;
+.inputs input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 127, 42, 0.1);
+  border-color: #fe8402;
 }
 
-.registerButton {
-  padding: 14px;
-  background-color: #4c6ef5;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
+.first_last {
+  display: flex;
+  gap: 10px;
 }
 
-.registerButton:hover {
-  background-color: #ff8a00;
+.first_last > div {
+  flex: 1;
 }
 
-.rowGroup {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.first_last input {
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.passwordWrapper {
-  position: relative;
+.first,
+.last,
+.user,
+.email,
+.password {
   width: 100%;
 }
 
-.eyeButton {
+/* =========================
+   Password Visibility
+========================= */
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordWrapper input {
+  padding-right: 40px;
+}
+
+.eyeIcon {
   position: absolute;
-  right: 10px;
-  top: 0%;
-  bottom: 0%;
+  right: 12px;
+  top: 50%;
   transform: translateY(-50%);
-  background: none;
-  border: none;
+  color: #777;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  transition: color 0.2s ease;
 }
 
-.consentRow {
-  font-size: 12px;
-  color: #666;
+.eyeIcon:hover {
+  color: #fe8402;
 }
 
-.consentRow a { color: #4c6ef5; text-decoration: none; }
-.consentRow a:hover { text-decoration: underline; }
+/* =========================
+   Error & Success Messages
+========================= */
+.error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
 
-.bottomLink {
+.success {
+  color: #188038;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.inputError {
+  border: 2px solid #d93025 !important;
+}
+
+/* =========================
+   Agreement & Button
+========================= */
+.agree2 {
+  font-size: 0.85rem;
   text-align: center;
-  color: #ff8a00;
-  margin-top: 12px;
+  margin: 10px 0 20px;
+  /* color: #666; */
+  color: #2959f5
 }
 
+/* .agree2 a {
+  color: #2959f5;
+  text-decoration: none;
+} */
+
+.agree2 a:hover {
+  /* text-decoration: underline; */
+   background-color: #e67c00;
+}
+
+.login_form_input button {
+  width: 100%;
+  padding: 12px;
+  background-color: #fe8402;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.login_form_input button:hover {
+  background-color: #e67c00;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Account Link
+========================= */
+.account p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.account p a {
+  color: #fe8402;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.account p a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Right-Side Description
+========================= */
+.Evangadi_description {
+  flex: 1;
+  max-width: 480px;
+  color: #555;
+  line-height: 1.6;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-clip: text;
+  color: transparent;
+}
+
+.title_link a {
+  color: #fe8402;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.title {
+  color: #4b456f;
+  font-size: 2rem;
+  margin: 10px 0 20px;
+  background: linear-gradient(to right, #fd5310, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Evangadi_description p {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.aboutButton {
+  background-color: #2959f5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.aboutButton:hover {
+  background-color: #fe8402;
+}
+
+/* =========================
+   Responsive Design
+========================= */
 @media (max-width: 768px) {
-  .rowGroup { grid-template-columns: 1fr; }
-  .registerContainer { padding: 24px; }
+  body {
+    display: block;
+  }
+
+  .login_container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px;
+    width: 100%;
+    height: auto;
+  }
+
+  .login_wrapper,
+  .Evangadi_description {
+    max-width: 90%;
+    width: 100%;
+  }
+
+  .Evangadi_description {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .aboutButton {
+    font-size: 0.9rem;
+  }
+
+  .login_container::after {
+    display: none;
+  }
+}
+.login_container {
+  width: 85vw;        /* Slightly narrower than 90vw */
+  height: 70vh;
+  max-width: 1400px;  /* Reduced from 1600px */
+  padding: 40px 50px; /* Slightly less horizontal padding */
 }
 
+.login_wrapper {
+  max-width: 520px;   /* Slightly narrower than 560px */
+}
+
+.Evangadi_description {
+  max-width: 440px;   /* Slightly narrower than 480px */
+}

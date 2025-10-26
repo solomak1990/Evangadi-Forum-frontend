@@ -1,80 +1,121 @@
-import React from 'react'
-import  Classes from "../Howitworks/Howitworks.module.css";
-import Header from '../Header/Header';
-function Howitworks() {
+
+import React from "react";
+import "./howItWorks.css";
+
+const HowItWorks = () => {
   return (
-    <div>
-      <Header />
-      <div className={Classes.container}>
-        <div className={Classes.Title}>
-          <h1>How it works</h1>
-        </div>
-        <div className={Classes.SubTitle}>
-          <h2>Introduction</h2>
-          <p>
-            Welcome to <b>EVANGADI FORUM, </b> a platform where technology
-            enthusiasts connect, share, and solve problems collaboratively. Our
-            forum is designed to help you find answers, contribute your
-            knowledge, and engage with a community of like-minded individuals.{" "}
-          </p>
-          <h2>Creating an Account</h2>
-          <p>
-            To become a member of our community, please click the 'Sign Up'
-            button located at the top right of the page. Enter your email
-            address, select a username, and create a password. You will receive
-            a confirmation email to activate your account.
-          </p>
-          <h2>Exploring Categories</h2>
-          <p>Our forum is organized into various categories. These include:</p>
-          <ul>
-            <li>
-              Categories displaying questions asked by other forum members.
-            </li>
-            <li>Pages with detailed views of individual questions.</li>
-            <li>Areas where you can post your own questions.</li>
-          </ul>
-          <p>
-            Use the navigation bar to access the home page and to log out from
-            the forum.
-          </p>
-          <h2>Searching for Questions</h2>
-          <p>
-            If you are seeking specific questions, utilize the search bar
-            located at the top right of the home page. Enter relevant keywords
-            to find threads and posts that match your query.
-          </p>
-          <h2>Posting a Question</h2>
-          <p>
-            To post a new question, provide a clear and descriptive title, and
-            include a detailed explanation of your question or topic. Click
-            'Post' to submit your inquiry.
-          </p>
-          <h2>Replying to a Question </h2>
-          <p>
-            To respond to a question, open the specific question you are
-            interested in and type your response in the text box provided. Click
-            'Post Answer' to share your insights or provide a solution.
-          </p>
-          <h2>Community Guidelines</h2>
-          <p>
-            To ensure a positive experience for all members, please adhere to
-            our community guidelines. Be respectful, avoid spam, and contribute
-            constructively to discussions.
-          </p>
-          <h2>Contact and Support</h2>
-          <p>
-            For additional information, please visit our Evangadi Networks page
-            or contact our support team via the Contact Info section located at
-            the bottom of the page. <br />
-            <br />
-            We are here to assist you with any questions or concerns you may
-            have. We are excited to have you join our community! Dive in, share
-            your knowledge, and enjoy the discussions. Happy posting!
+    <div className="howitwork-page">
+      {/* Hero Section */}
+      <section className="hero text-center text-white py-5 bg-primary">
+        <div className="container">
+          <h1 className="display-5 fw-bold">How Evangadi Forum Works</h1>
+          <p className="lead mt-3">
+            Connect, ask, and learn — our community thrives on shared knowledge
+            and collaboration.
           </p>
         </div>
-      </div>
+      </section>
+
+      <section className="guidelines py-5 bg-white">
+        <div className="container text-center">
+          <h2 className="fw-bold mb-5 text-dark">Getting Started</h2>
+          <div className="row g-4">
+            {/* Sign Up */}
+            <div className="col-md-4">
+              <div className="shadow-sm p-4 h-100 bg-white border rounded">
+                <h5 className="fw-bold text-dark mb-3">📝 Sign Up</h5>
+                <ul className="text-start text-dark fw-semibold">
+                  <li>
+                    <strong>Create an account</strong> to join the Evangadi
+                    community.
+                  </li>
+                  <li>
+                    <strong>Fill in required fields:</strong>
+                  </li>
+                  <ul className="ms-3">
+                    <li>Username</li>
+                    <li>First Name</li>
+                    <li>Last Name</li>
+                    <li>Email</li>
+                    <li>Password</li>
+                  </ul>
+                  <li>
+                    Click <strong>"Agree and Join"</strong> to register.
+                  </li>
+                  <li>Receive a confirmation message upon success.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Ask or Answer */}
+            <div className="col-md-4">
+              <div className="shadow-sm p-4 h-100 bg-white border rounded">
+                <h5 className="fw-bold text-dark mb-3">💬 Ask or Answer</h5>
+                <ul className="text-start">
+                  <li>
+                    Go to the <strong>Home page</strong> to view questions.
+                  </li>
+                  <li>Click a question title to see details and answers.</li>
+                  <li>If unanswered, you'll be prompted to contribute.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Engage */}
+            <div className="col-md-4">
+              <div className="shadow-sm p-4 h-100 bg-white border rounded">
+                <h5 className="fw-bold text-dark mb-3">🤝 Engage</h5>
+                <ul className="text-start">
+                  <li>Discuss with peers.</li>
+                  <li>Upvote helpful answers.</li>
+                  <li>Connect for continuous learning.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Guidelines */}
+      <section className="guidelines py-5 bg-white">
+        <div className="container">
+          <h2 className="fw-bold text-center mb-4">Community Guidelines</h2>
+          <div className="row justify-content-center">
+            <div className="col-md-8">
+              <ul className="list-group list-group-flush text-start fs-5">
+                <li className="list-group-item">
+                  ✅ Be respectful and kind to others.
+                </li>
+                <li className="list-group-item">
+                  💡 Ask clear, constructive questions.
+                </li>
+                <li className="list-group-item">
+                  🙌 Upvote helpful answers to support others.
+                </li>
+                <li className="list-group-item">
+                  🚫 Avoid spam, offensive language, or unrelated content.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta text-center text-white py-5 bg-dark">
+        <div className="container">
+          <h2 className="fw-bold">Ready to Contribute?</h2>
+          <p className="mb-4">
+            Join thousands of learners exchanging ideas every day.
+          </p>
+          <a href="/register" className="btn btn-warning px-4 py-2 fw-semibold">
+            Join Now
+          </a>
+        </div>
+      </section>
     </div>
   );
-}
+};
 
-export default Howitworks
+export default HowItWorks;
+
