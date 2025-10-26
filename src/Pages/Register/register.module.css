@@ -165,8 +165,14 @@ body {
   padding-right: 40px;
 }
 
+/* .eyeIcon { */
+
 .eyeIcon {
   position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
@@ -180,6 +186,9 @@ body {
   color: #fe8402;
 }
 
+/* =========================
+   Error & Success Messages
+========================= */
 /* =========================
    Error & Success Messages
 ========================= */

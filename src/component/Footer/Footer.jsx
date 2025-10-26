@@ -1,4 +1,4 @@
-import classes from "./Footer.module.css";
+import classes from "./footer.module.css";
 import logo from "../../assets/footlogo.png";
 import { Link } from "react-router-dom";
 
