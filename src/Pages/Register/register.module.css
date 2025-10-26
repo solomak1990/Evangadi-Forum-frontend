@@ -1,39 +1,95 @@
-/* /* =========================
-   General Layout
+
+/* =========================
+   Full Background & Layout
 ========================= */
-.login_container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
   background-color: #f8f8f8;
   background-image: url("../../assets/BG.svg");
   background-size: cover;
   background-repeat: no-repeat;
-    /* max-width: 1000px;   */
-  padding: 20px 20px;
-  gap: 40px;
-   border-radius: 20px;
-  font-family:sans-serif;
-  min-height: 90vh;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+/* =========================
+   Full Background & Layout
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+  background-image: url("../../assets/BG.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/* =========================
+   Container
+========================= */
+.login_container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 40px 60px; /* wider horizontal padding */
+  width: 90vw;         /* wider than tall */
+  height: 70vh;        /* shorter height */
+  max-width: 1600px;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* =========================
-   Form Wrapper
+   Vertical Divider
+========================= */
+.login_container::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background-color: #ddd;
+  z-index: 0;
+}
+
+/* =========================
+   Registration Box
 ========================= */
 .login_wrapper {
-  width: 100%;
-  max-width: 420px;
+  flex: 1;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 30px 30px 40px;
+  padding: 40px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-
 /* =========================
-   Form Header
+   Form Styling
 ========================= */
+.login_form_input {
+  width: 100%;
+}
+
 .login_title {
   color: #333;
   font-size: 1.8rem;
@@ -41,26 +97,26 @@
   margin-bottom: 5px;
 }
 
-.login_form small {
+.login_form_input small {
   display: block;
   margin-bottom: 20px;
   font-size: 0.9rem;
 }
 
-.login_form small a {
+.login_form_input small a {
   color: #fe8402;
   text-decoration: none;
   font-weight: 500;
 }
 
-.login_form small a:hover {
+.login_form_input small a:hover {
   text-decoration: underline;
 }
 
 /* =========================
    Input Fields
 ========================= */
-.login_form_input input {
+.inputs input {
   width: 100%;
   font-size: 15px;
   padding: 12px 14px;
@@ -71,30 +127,45 @@
   transition: border-color 0.3s ease;
 }
 
-.login_form_input input:focus {
+.inputs input:focus {
   outline: none;
   border-color: #fe8402;
 }
 
-/* Grouped First/Last name */
 .first_last {
   display: flex;
   gap: 10px;
 }
 
-.first_last input {
+.first_last > div {
   flex: 1;
 }
 
-/* Password visibility icon */
+.first_last input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.first,
+.last,
+.user,
+.email,
+.password {
+  width: 100%;
+}
+
+/* =========================
+   Password Visibility
+========================= */
 .passwordWrapper {
   position: relative;
 }
 
 .passwordWrapper input {
-  width: 100%;
   padding-right: 40px;
 }
+
+/* .eyeIcon { */
 
 .eyeIcon {
   position: absolute;
@@ -102,16 +173,22 @@
   top: 50%;
   transform: translateY(-50%);
   color: #777;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
   cursor: pointer;
   font-size: 18px;
   transition: color 0.2s ease;
-  padding-bottom: 15px;
 }
 
 .eyeIcon:hover {
   color: #fe8402;
 }
 
+/* =========================
+   Error & Success Messages
+========================= */
 /* =========================
    Error & Success Messages
 ========================= */
@@ -132,22 +209,24 @@
 }
 
 /* =========================
-   Buttons & Agreement
+   Agreement & Button
 ========================= */
 .agree2 {
   font-size: 0.85rem;
   text-align: center;
   margin: 10px 0 20px;
-  color: #666;
+  /* color: #666; */
+  color: #2959f5
 }
 
-.agree2 a {
-  color: #fe8402;
+/* .agree2 a {
+  color: #2959f5;
   text-decoration: none;
-}
+} */
 
 .agree2 a:hover {
-  text-decoration: underline;
+  /* text-decoration: underline; */
+   background-color: #e67c00;
 }
 
 .login_form_input button {
@@ -168,7 +247,9 @@
   transform: translateY(-2px);
 }
 
-/* Already have account link */
+/* =========================
+   Account Link
+========================= */
 .account p {
   text-align: center;
   margin-top: 10px;
@@ -188,32 +269,43 @@
    Right-Side Description
 ========================= */
 .Evangadi_description {
-  width: 35%;
+  flex: 1;
   max-width: 480px;
   color: #555;
   line-height: 1.6;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-clip: text;
+  color: transparent;
 }
 
 .title_link a {
   color: #fe8402;
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .title {
   color: #4b456f;
   font-size: 2rem;
   margin: 10px 0 20px;
+  background: linear-gradient(to right, #fd5310, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .Evangadi_description p {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   margin-bottom: 15px;
 }
 
 .aboutButton {
-  background-color: #fe8402;
+  background-color: #2959f5;
   color: white;
   border: none;
   border-radius: 6px;
@@ -225,22 +317,33 @@
 }
 
 .aboutButton:hover {
-  background-color: #e67c00;
+  background-color: #fe8402;
 }
 
 /* =========================
    Responsive Design
 ========================= */
 @media (max-width: 768px) {
+  body {
+    display: block;
+  }
+
   .login_container {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    padding: 40px 15px;
+    gap: 20px;
+    padding: 30px 20px;
+    width: 100%;
+    height: auto;
+  }
+
+  .login_wrapper,
+  .Evangadi_description {
+    max-width: 90%;
+    width: 100%;
   }
 
   .Evangadi_description {
-    width: 90%;
     text-align: center;
   }
 
@@ -251,4 +354,22 @@
   .aboutButton {
     font-size: 0.9rem;
   }
+
+  .login_container::after {
+    display: none;
+  }
+}
+.login_container {
+  width: 85vw;        /* Slightly narrower than 90vw */
+  height: 70vh;
+  max-width: 1400px;  /* Reduced from 1600px */
+  padding: 40px 50px; /* Slightly less horizontal padding */
+}
+
+.login_wrapper {
+  max-width: 520px;   /* Slightly narrower than 560px */
+}
+
+.Evangadi_description {
+  max-width: 440px;   /* Slightly narrower than 480px */
 }

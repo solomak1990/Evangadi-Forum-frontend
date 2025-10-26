@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout/Layout";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-
 function Register() {
   const navigate = useNavigate();
   const usernameDom = useRef();
