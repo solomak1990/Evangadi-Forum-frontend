@@ -1,31 +1,33 @@
-import React from 'react';
-import './LoadingSpinner.css';
+import React from "react";
+import "./LoadingSpinner.css";
 
-const LoadingSpinner = ({ 
-  size = 'medium', 
-  color = 'primary', 
-  text = '', 
+const LoadingSpinner = ({
+  size = "medium",
+  color = "primary",
+  text = "",
   fullScreen = false,
-  overlay = false 
+  overlay = false,
 }) => {
   const sizeClasses = {
-    small: 'spinner-sm',
-    medium: 'spinner-md',
-    large: 'spinner-lg'
+    small: "spinner-sm",
+    medium: "spinner-md",
+    large: "spinner-lg",
   };
 
   const colorClasses = {
-    primary: 'spinner-primary',
-    secondary: 'spinner-secondary',
-    success: 'spinner-success',
-    danger: 'spinner-danger',
-    warning: 'spinner-warning',
-    light: 'spinner-light',
-    dark: 'spinner-dark'
+    primary: "spinner-primary",
+    secondary: "spinner-secondary",
+    success: "spinner-success",
+    danger: "spinner-danger",
+    warning: "spinner-warning",
+    light: "spinner-light",
+    dark: "spinner-dark",
   };
 
   const spinnerContent = (
-    <div className={`loading-spinner ${sizeClasses[size]} ${colorClasses[color]}`}>
+    <div
+      className={`loading-spinner ${sizeClasses[size]} ${colorClasses[color]}`}
+    >
       <div className="spinner-container">
         <div className="spinner-border" role="status" aria-hidden="true">
           <span className="sr-only">Loading...</span>
@@ -36,19 +38,11 @@ const LoadingSpinner = ({
   );
 
   if (fullScreen) {
-    return (
-      <div className="loading-fullscreen">
-        {spinnerContent}
-      </div>
-    );
+    return <div className="loading-fullscreen">{spinnerContent}</div>;
   }
 
   if (overlay) {
-    return (
-      <div className="loading-overlay">
-        {spinnerContent}
-      </div>
-    );
+    return <div className="loading-overlay">{spinnerContent}</div>;
   }
 
   return spinnerContent;
@@ -60,7 +54,11 @@ export const ButtonSpinner = ({ loading = false, children, ...props }) => {
     <button {...props} disabled={loading || props.disabled}>
       {loading ? (
         <>
-          <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          <span
+            className="spinner-border spinner-border-sm me-2"
+            role="status"
+            aria-hidden="true"
+          ></span>
           Loading...
         </>
       ) : (
@@ -71,16 +69,24 @@ export const ButtonSpinner = ({ loading = false, children, ...props }) => {
 };
 
 // Inline Loading Spinner for small operations
-export const InlineSpinner = ({ size = 'small', color = 'primary' }) => {
+export const InlineSpinner = ({ size = "small", color = "primary" }) => {
   return (
-    <span className={`inline-spinner ${size === 'small' ? 'spinner-sm' : 'spinner-md'} ${color === 'primary' ? 'spinner-primary' : 'spinner-secondary'}`}>
-      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span
+      className={`inline-spinner ${
+        size === "small" ? "spinner-sm" : "spinner-md"
+      } ${color === "primary" ? "spinner-primary" : "spinner-secondary"}`}
+    >
+      <span
+        className="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
     </span>
   );
 };
 
 // Page Loading Component
-export const PageLoader = ({ message = 'Loading...' }) => {
+export const PageLoader = ({ message = "Loading..." }) => {
   return (
     <div className="page-loader">
       <div className="page-loader-content">
@@ -91,7 +97,7 @@ export const PageLoader = ({ message = 'Loading...' }) => {
 };
 
 // Card Loading Component
-export const CardLoader = ({ message = 'Loading...' }) => {
+export const CardLoader = ({ message = "Loading..." }) => {
   return (
     <div className="card-loader">
       <div className="card-loader-content">
@@ -102,7 +108,3 @@ export const CardLoader = ({ message = 'Loading...' }) => {
 };
 
 export default LoadingSpinner;
-<<<<<<< HEAD
-=======
-
->>>>>>> fa324ae9d758e4e81fe772d67ff0d923a42dba8a

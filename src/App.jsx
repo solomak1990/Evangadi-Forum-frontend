@@ -9,9 +9,9 @@ import Register from "./Pages/Register/Register.jsx";
 import QuestionDetail from "./Pages/Questionlist/QuestionDetail.jsx";
 import Answer from "./Pages/Answer/Answer.jsx";
 import NotFound from "./Pages/Login/Notfound.jsx";
-import QuestionList from "./Pages/Questionlist/QuestionList.jsx"
+import QuestionList from "./Pages/Questionlist/QuestionList.jsx";
 import { getToken } from "./utils/tokenHelper.js";
-import HowItWorks from "./Pages/Howitworks/Howitworks.jsx"
+import HowItWorks from "./Pages/Howitworks/Howitworks.jsx";
 import TermsAndConditions from "./Pages/TermsAndConditions/TermsAndConditions.jsx";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword.jsx";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";

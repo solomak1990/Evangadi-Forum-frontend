@@ -8,38 +8,29 @@ import axios from "../../axiosConfig"; // Import axios
 import LoadingSpinner from "../../component/LoadingSpinner/LoadingSpinner";
 
 function Home() {
-  const [userData, setUserData] = useContext(UserContext); // Get setUserData if available for context update
+  const [userData] = useContext(UserContext);
   const navigate = useNavigate();
-  const isLoggedIn = !!userData.user;
 
-  // State to hold fetched data and manage request status
   const [allQuestions, setAllQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [searchQuery, setSearchQuery] = useState("");
 
-  // 1. Authentication Check and Redirect
-  useEffect(() => {
-    // Allow navigation if user exists or a token exists (post-login before checkUser completes)
-    const hasToken = !!(userData?.token || localStorage.getItem("token"));
-    if (!isLoggedIn && !hasToken) {
-      navigate("/login");
-    }
-  }, [isLoggedIn, navigate, userData]);
+  const isLoggedIn = !!userData?.user;
+  const token = userData?.token || localStorage.getItem("token");
 
-  // 2. Fetch Questions (use token if required by backend)
+  // 🔹 Fetch Questions
   const fetchQuestions = useCallback(async () => {
+    if (!token) return;
+
     try {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem("token");
       const res = await axios.get("/api/question", {
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Assuming res.data contains { questions: [...] }
       if (res.data.questions && Array.isArray(res.data.questions)) {
         setAllQuestions(res.data.questions);
       } else {
@@ -47,27 +38,30 @@ function Home() {
         setError("Invalid response format from server.");
       }
     } catch (err) {
-
-      // Handle errors (e.g., 500 server error, network failure)
       setError("Failed to load questions. Please try again.");
     } finally {
       setLoading(false);
     }
-  }, [navigate, setUserData]);
+  }, [token]);
 
+  // 🔹 Redirect if no token
   useEffect(() => {
-    // Only attempt to fetch questions if the user is logged in
-    if (isLoggedIn) {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
+
+  // 🔹 Auto-fetch as soon as user logs in or token becomes available
+  useEffect(() => {
+    if (token) {
       fetchQuestions();
     }
-  }, [isLoggedIn, fetchQuestions]);
+  }, [fetchQuestions, token]);
 
-  // 3. Search and Filtering Logic
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
 
-  // The list shown is either the filtered list or the full list
-  const questionsToShow = allQuestions.filter((question) =>
-    question.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const questionsToShow = allQuestions.filter((q) =>
+    q.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (loading)
@@ -78,14 +72,12 @@ function Home() {
         </div>
       </Layout>
     );
-  // if an error occurred after loading
+
   if (error)
     return (
       <Layout>
         <div className={classes.container}>
-          <div className="alert alert-danger text-center">
-            {error}
-          </div>
+          <div className="alert alert-danger text-center">{error}</div>
         </div>
       </Layout>
     );
@@ -93,30 +85,31 @@ function Home() {
   return (
     <Layout>
       <div className={classes.container}>
-        {/* Welcome + Ask Button + Search Section */}
+        {/* Header */}
         <div className={classes.userActions}>
-          {/* ... (Welcome text, Ask Button container, and Search Box remain the same) */}
           <span className={classes.welcomeText}>
             Welcome:{" "}
             <span className={classes.username}>
-              {userData.user?.display_name || userData.user?.user_name || userData.user?.username || "Guest"}
+              {userData.user?.display_name ||
+                userData.user?.user_name ||
+                userData.user?.username ||
+                "Guest"}
             </span>
           </span>
 
           <div className={classes.askButtonContainer}>
-            <Link to="/question">
-              <button className={classes.askButton}>Ask Question</button>
+            <Link to="/question" className={classes.askButton}>
+              Ask Question
             </Link>
           </div>
 
           <div className={classes.searchBox}>
             <input
               type="text"
-              placeholder="search question"
+              placeholder="Search question"
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
-            {/* Keeping the handleSearch function out as per previous steps */}
           </div>
         </div>
 

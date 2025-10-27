@@ -31,6 +31,7 @@ function Question() {
     }
 
     try {
+
       await axios.post(
         "api/question",
         {
@@ -44,13 +45,16 @@ function Question() {
         }
       );
 
+      // ✅ Notify all listeners that new questions were added
+      window.dispatchEvent(new Event("questions-updated"));
+
       setError("");
       setSuccess("Thank you for your question!");
       titleDom.current.value = "";
       descriptionDom.current.value = "";
 
-      // Redirect after 2 seconds
-      setTimeout(() => navigate("/home"), 2000);
+      // Wait briefly so the listener fires before redirecting
+      setTimeout(() => navigate("/home"), 800);
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Something went wrong!");
@@ -68,23 +72,32 @@ function Question() {
           <ul className={classes.question_li}>
             <li>Summarize your problems in a one-line title.</li>
             <li>Describe your problem in more detail.</li>
-            <li>Explain what you have tried and what you expected to happen.</li>
+            <li>
+              Explain what you have tried and what you expected to happen.
+            </li>
             <li>Review your question and post it to the site.</li>
           </ul>
+
           <h4>Ask a public question</h4>
+
           <div className={classes.question_headtitle2}>
             {error && <p className={classes.error}>{error}</p>}
             {success && <p className={classes.success}>{success}</p>}
+
             <form onSubmit={handleSubmit}>
               <input
-                className={`${classes.question_title} ${error ? classes.inputError : ""}`}
+                className={`${classes.question_title} ${
+                  error ? classes.inputError : ""
+                }`}
                 ref={titleDom}
                 type="text"
                 placeholder="Title"
               />
               <textarea
                 rows={4}
-                className={`${classes.question_description} ${error ? classes.inputError : ""}`}
+                className={`${classes.question_description} ${
+                  error ? classes.inputError : ""
+                }`}
                 ref={descriptionDom}
                 placeholder="Question Description..."
               />

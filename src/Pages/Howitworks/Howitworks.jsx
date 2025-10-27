@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./howItWorks.css";
 
@@ -117,4 +116,3 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
-

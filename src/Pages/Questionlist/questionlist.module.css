@@ -1,5 +1,4 @@
-/* QuestionList Styles */
-/* .container {
+ .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
@@ -7,257 +6,28 @@
   min-height: 100vh;
 }
 
-.questionListTitle {
-  font-size: 32px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-  margin-bottom: 40px;
-  padding: 20px;
-  background: linear-gradient(135deg, #ff7f2a, #ff9800);
-  color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(255, 127, 42, 0.3);
-}
-
-.questionCard {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 25px;
-  padding: 25px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-left: 4px solid #ff7f2a;
-}
-
-.questionCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.questionTitle {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #333;
-  line-height: 1.4;
-}
-
-.questionLink {
-  color: #333;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.questionLink:hover {
-  color: #ff7f2a;
-}
-
-.questionDescription {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.questionMeta {
-  font-size: 14px;
-  color: #888;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.emptyMessage {
-  text-align: center;
-  font-size: 18px;
-  color: #666;
-  background: #f8f9fa;
-  padding: 40px;
-  margin: 40px auto;
-  border-radius: 10px;
-  max-width: 600px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-} */
-
-/* Responsive Design */
-/* @media (max-width: 768px) {
-  .questionListTitle {
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .questionCard {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .questionTitle {
-    font-size: 18px;
-  }
-} */
-
-
-/* QuestionList Styles */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-}
-
-.questionListTitle {
-  /* Hiding the header to match the image's structure where no general header is shown */
-  display: none; 
-}
-
-.questionCard {
-  /* Re-purposing questionCard for the full row item */
-  background: white;
-  border-radius: 0; /* Remove rounded corners for a clean row look */
-  box-shadow: none; /* Remove box shadow */
-  border-left: none; /* Remove left border */
-  border-bottom: 1px solid #eee; /* Use a bottom border as separator */
-  margin-bottom: 0; /* No margin between items, border handles spacing */
-  padding: 15px 0; /* Padding for the row */
-  transition: background-color 0.2s ease;
-  width: 300px;
-  /* Flexbox for the row content (Profile | Title | Arrow) */
-  display: flex;
-  align-items: center;
-  cursor: pointer; /* Indicate clickability */
-}
-
-.questionCard:hover {
-  transform: none; /* No vertical movement on hover */
-  box-shadow: none; /* No shadow change on hover */
-  background-color: #f9f9f9; /* Subtle background change on hover */
-}
-
-/* 1. Profile Group (Left side) */
-.profileGroup {
-    display: flex;
-    flex-direction: column; /* Stack icon and name vertically */
-    align-items: center;
-    width: 100px; /* Fixed width for alignment */
-    min-width: 100px;
-    margin-right: 20px;
-    text-align: center;
-}
-
-.profileIcon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #e6f0ff;
-    color: #2a56c6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-
-.usernameDisplay {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 5px;
-    /* This class needs to be applied to the user_name element */
-}
-
-/* 2. Question Content (Center) */
-.questionContent {
-    flex-grow: 1; /* Takes up all available space */
-    display: flex;
-    flex-direction: column;
-}
-
-.questionTitle {
-  /* Use this class for the actual question text */
-  font-size: 1.1rem; /* Smaller, modern font size */
-  font-weight: 500;
-  margin: 0;
-  color: #007bff; /* Blue link color */
-  line-height: 1.4;
-}
-
-.questionLink {
-  /* This link style is now applied to the question title itself */
-  color: inherit;
-  text-decoration: none;
-}
-
-.questionLink:hover {
-  color: #0056b3;
-}
-
-/* Hide Description and Meta data as they are not shown in the image list view */
-.questionDescription,
-.questionMeta {
-  display: none; 
-}
-
-/* 3. Navigation Arrow (Right side) */
-.arrowIcon {
-    font-size: 1.5rem;
-    color: #555;
-    margin-left: 20px;
-}
-.buttonContainer {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-/* ------------------------------------------------ */
-
-.emptyMessage {
-  /* Keep original styling for empty message */
-text-align: center;
-font-size: 18px;
-color: #666;
-background: #f8f9fa;
-padding: 40px;
-margin: 40px auto;
-border-radius: 10px;
-max-width: 600px;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-.questionListTitle {
-  font-size: 24px;
-  margin-bottom: 30px;
-}
-  
-.questionCard {
-  padding: 15px 10px;
-  margin-bottom: 0;
-}
-  
-  .profileGroup {
-      width: 80px;
-      min-width: 80px;
-      margin-right: 10px;
-  }
-
-  .profileIcon {
-      font-size: 2rem;
-  }
-}
 
 .questionTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .questionTable th,
 .questionTable td {
-  padding: 32px;
-  border-bottom: 1px solid #ccc;
+  padding: 16px 20px;
+  border-bottom: 1px solid #ddd;
   text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+.questionTable th {
+  background-color: #f1f1f1;
+  font-weight: 600;
 }
 
 .questionRow:hover {
@@ -265,35 +35,147 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
+
 .profileIcon {
   font-weight: bold;
   background-color: #eee;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #333;
 }
 
+/* =========================
+   Pagination
+========================= */
 .pagination {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .pagination button {
-  padding: 6px 12px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #fe8402;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #e67c00;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .pagination span {
-  font-weight: bold;
+  font-weight: 600;
+  color: #333;
+  align-self: center;
 }
 
+/* =========================
+   Responsive Design
+========================= */
 
+/* Tablets */
+@media (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
 
+  .questionTable th,
+  .questionTable td {
+    padding: 12px 10px;
+    font-size: 0.95rem;
+  }
+}
 
+/* Mobile - Table turns into stacked cards */
+@media (max-width: 768px) {
+  .questionTable,
+  .questionTable thead,
+  .questionTable tbody,
+  .questionTable th,
+  .questionTable td,
+  .questionTable tr {
+    display: block;
+    width: 100%;
+  }
 
+  .questionTable thead {
+    display: none; /* Hide header on small screens */
+  }
 
+  .questionTable tr {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+  }
+
+  .questionTable td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.95rem;
+  }
+
+  .questionTable td::before {
+    content: attr(data-label); /* Use column headers as labels */
+    font-weight: 600;
+    color: #666;
+  }
+
+  .profileIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pagination button {
+    width: 100%;
+  }
+
+  .pagination span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .questionTable tr {
+    padding: 10px;
+  }
+
+  .questionTable td {
+    font-size: 0.9rem;
+  }
+
+  .pagination span {
+    font-size: 0.85rem;
+  }
+}

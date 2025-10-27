@@ -3,11 +3,13 @@ import axios from "axios";
 import { getToken, removeToken } from "./utils/tokenHelper";
 
 const axiosBase = axios.create({
-  // ********local**********//
   // baseURL:"http://localhost:2025",
-  
-  // ********deployed********//
+  // baseURL: "https://forumevangadibackend.natesirak.com",
+  // baseURL: "https://evangadiba.solomonhunegnaw.com",
   baseURL:"https://evangadiforum.ekhlasabdulmelik.com/"
+  // baseURL: " http://localhost:2025",
+  // baseURL:"https://forumevangadibackend.natesirak.com",
+  // baseURL:"https://evangadiforumfend.natesirak.com"
 });
 
 // Add token to all requests automatically
