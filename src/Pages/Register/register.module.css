@@ -1,113 +1,71 @@
-/* =========================
-   Full Background & Layout
+/* /* =========================   
+General Layout
 ========================= */
-/* (kept your original choices; fixed only scrolling/height issues) */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: sans-serif;
-  /* allow vertical scrolling if content is taller than viewport */
-  overflow-y: auto;
-}
-
-body {
+.login_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   background-color: #f8f8f8;
   background-image: url("../../assets/BG.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+    /* max-width: 1000px;   */
+  padding: 20px 20px;
+  gap: 40px;   border-radius: 20px;
+  font-family:sans-serif;
+  min-height:70vh;
 }
 
 /* =========================
-   Container
-   — changed: use min-height instead of fixed height,
-              align-items: flex-start so top content isn't clipped,
-              added top/bottom padding to keep space from browser bars/headers
-========================= */
-.login_container {
-  display: flex;
-  align-items: flex-start; /* prevent cutting off top content */
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 10px;
-  padding: 40px 60px;
-  width: 90vw;
-  min-height: 100vh;      /* allow the container to fill page and grow */
-  max-width: 1600px;
-  margin: 0 auto;         /* center horizontally; avoid shorthand that can cause clipping */
-  box-sizing: border-box;
-  position: relative;
-  padding-top: 60px;      /* ensure some top breathing room (helps when there's a header) */
-  padding-bottom: 60px;   /* space so bottom elements don't hug viewport edge */
-}
-
-/* =========================
-   Vertical Divider
-========================= */
-.login_container::after {
-  content: "";
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 50%;
-  width: 1px;
-  background-color: #ddd;
-  z-index: 0;
-}
-
-/* =========================
-   Registration Box
+Form Wrapper
 ========================= */
 .login_wrapper {
-  flex: 1;
+  width: 100%;
+  max-width: 620px;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 40px;
+  padding: 30px 30px 40px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* prevent wrapper from becoming too short when container grows */
-  min-height: 320px;
 }
+
+/* .login_form {
+  width: 100%;
+  text-align: center;
+} */
 
 /* =========================
-   Form Styling
+   Form Header
 ========================= */
-.login_form_input {
-  width: 100%;
-}
-
 .login_title {
   color: #333;
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 5px;
+  text-align: center;
 }
 
-.login_form_input small {
+.login_form small {
   display: block;
   margin-bottom: 20px;
   font-size: 0.9rem;
+  text-align: center;
 }
 
-.login_form_input small a {
+.login_form small a {
   color: #fe8402;
   text-decoration: none;
   font-weight: 500;
 }
 
-.login_form_input small a:hover {
+.login_form small a:hover {
   text-decoration: underline;
 }
 
 /* =========================
-   Input Fields
+Input Fields
 ========================= */
-.inputs input {
+.login_form_input input {
   width: 100%;
   font-size: 15px;
   padding: 12px 14px;
@@ -118,42 +76,32 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.inputs input:focus {
+.login_form_input input:focus {
   outline: none;
   border-color: #fe8402;
 }
 
-/* pair inputs row */
+/* Grouped First/Last name */
 .first_last {
   display: flex;
   gap: 10px;
 }
 
+.first_last input {
+  flex: 1;
+}
 .first_last > div {
   flex: 1;
 }
 
-.first_last input {
-  width: 100%;
-  box-sizing: border-box;
-}
 
-.first,
-.last,
-.user,
-.email,
-.password {
-  width: 100%;
-}
-
-/* =========================
-   Password Visibility
-========================= */
+/* Password visibility icon */
 .passwordWrapper {
   position: relative;
 }
 
 .passwordWrapper input {
+  width: 100%;
   padding-right: 40px;
 }
 
@@ -173,7 +121,7 @@ body {
 }
 
 /* =========================
-   Error & Success Messages
+Error & Success Messages
 ========================= */
 .error {
   color: #d93025;
@@ -192,24 +140,28 @@ body {
 }
 
 /* =========================
-   Agreement & Button
+Buttons & Agreement
 ========================= */
 .agree2 {
   font-size: 0.85rem;
   text-align: center;
   margin: 10px 0 20px;
-  color: #2959f5;
+  color: #666;
+}
+
+.agree2 a {
+  color: #6c78fa;
+  text-decoration: none;
 }
 
 .agree2 a:hover {
-  /* keep hover subtle — avoid making large areas solid */
   text-decoration: underline;
 }
 
 .login_form_input button {
   width: 100%;
   padding: 12px;
-  background-color: #fe8402;
+  background-color: #6c78fa;
   color: white;
   border: none;
   border-radius: 8px;
@@ -224,9 +176,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* =========================
-   Account Link
-========================= */
+/* Already have account link */
 .account p {
   text-align: center;
   margin-top: 10px;
@@ -243,34 +193,23 @@ body {
 }
 
 /* =========================
-   Right-Side Description
-   — FIXED: removed color: transparent that hid text
-   — kept gradient title behaviour only for .title
+Right-Side Description
 ========================= */
 .Evangadi_description {
-  flex: 1;
+  width: 35%;
   max-width: 480px;
-  color: #555;                /* readable text color */
+  color: #555;
   line-height: 1.6;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* removed background-clip + transparent color that hid text */
-  /* if you want gradient text only for the main title, keep that on .title only */
 }
 
 .title_link a {
   color: #fe8402;
   text-decoration: none;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .title {
-  /* gradient title preserved */
   color: #4b456f;
   font-size: 2rem;
   margin: 10px 0 20px;
@@ -280,13 +219,12 @@ body {
 }
 
 .Evangadi_description p {
-  font-size: 1.1rem; /* reduced from 1.5rem to avoid overflow and improve readability */
+  font-size: 0.98rem;
   margin-bottom: 15px;
 }
 
-/* keep the button styling */
 .aboutButton {
-  background-color: #2959f5;
+  background-color: #fe8402;
   color: white;
   border: none;
   border-radius: 6px;
@@ -298,56 +236,22 @@ body {
 }
 
 .aboutButton:hover {
-  background-color: #fe8402;
+  background-color: #e67c00;
 }
 
 /* =========================
-   Minor size tweaks you had at the bottom
-   — preserved but adjusted to use min-height instead of fixed height above
-========================= */
-.login_container {
-  width: 85vw;
-  /* height removed (was 70vh) — use min-height above instead */
-  max-width: 1400px;
-  padding: 40px 50px;
-}
-
-.login_wrapper {
-  max-width: 520px;
-}
-
-.Evangadi_description {
-  max-width: 440px;
-}
-
-/* =========================
-   Responsive Design
-   — ensure scrolling on small screens and no top clipping
+Responsive Design
 ========================= */
 @media (max-width: 768px) {
-  body {
-    display: block;
-    /* allow vertical scrolling on small viewports */
-    overflow-y: auto;
-  }
-
   .login_container {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 30px 20px;
-    width: 100%;
-    height: auto;
-    min-height: auto;
-  }
-
-  .login_wrapper,
-  .Evangadi_description {
-    max-width: 90%;
-    width: 100%;
+    gap: 30px;
+    padding: 40px 15px;
   }
 
   .Evangadi_description {
+    width: 90%;
     text-align: center;
   }
 
@@ -357,9 +261,5 @@ body {
 
   .aboutButton {
     font-size: 0.9rem;
-  }
-
-  .login_container::after {
-    display: none;
   }
 }
